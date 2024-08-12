@@ -18,6 +18,10 @@
   <li>
     <a href="/form-reader" class="secondary" class:contrast={$page.url.pathname === '/form-reader'}>Form Analyzer</a>
   </li>
+  <!-- TODO get rid of it after testing -->
+  <li>
+    <a href="/contract-test" class="secondary" class:contrast={$page.url.pathname === '/contract-test'}>TEMP</a>
+  </li>
 {/if}
 <li><a href="/docs" class="secondary" class:contrast={$page.url.pathname === '/docs'}>Get Started</a></li>
 <li><a href="https://github.com/stellar-dapps/4m00se" class="secondary" target="_blank">GitHub ↗️</a></li>
