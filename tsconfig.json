@@ -10,8 +10,10 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true
-  }
+  },
+  "exclude": ["packages"]
 }

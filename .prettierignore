@@ -2,6 +2,10 @@
 package-lock.json
 pnpm-lock.yaml
 yarn.lock
-# Stuff related to non-Node smart contracts code
+
+# Stuff related to non-Node smart contracts code and code for auto-generated client packages
 Cargo.lock
-/contracts
+/contracts/*
+/packages/*
+/src/contracts/*
+!/src/contracts/util.ts

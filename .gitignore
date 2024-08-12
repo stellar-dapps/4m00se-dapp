@@ -29,3 +29,12 @@ Thumbs.db
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# generated Soroban contract clients
+packages/*
+# if you have other workspace packages, add them here
+!packages/.gitkeep
+
+# generated contract client imports
+src/contracts/*
+!src/contracts/util.ts
