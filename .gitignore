@@ -3,3 +3,29 @@ target
 
 # Local Soroban settings
 .soroban
+
+# The following is from the Frontend Template's .gitignore
+
+node_modules
+
+# Output
+.output
+.vercel
+/.svelte-kit
+/build
+/dist
+
+# OS
+.DS_Store
+Thumbs.db
+/.idea
+
+# Env
+.env
+.env.*
+!.env.example
+!.env.test
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
