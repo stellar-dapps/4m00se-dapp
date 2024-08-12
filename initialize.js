@@ -11,7 +11,7 @@ import { sync as glob } from 'glob';
 // so we don't need to specify duplicate variables in .env
 for (const key in process.env) {
   if (key.startsWith('VITE_')) {
-    process.env[key.substring(7)] = process.env[key];
+    process.env[key.substring(5)] = process.env[key];
   }
 }
 
