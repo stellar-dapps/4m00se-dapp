@@ -21,39 +21,6 @@ console.log('###################### Initializing ########################');
 const __filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(__filename);
 
-// Function to check if a command exists
-function commandExists(command) {
-  try {
-    execSync(`command -v ${command}`);
-    return true;
-  } catch (error) {
-    return false;
-  }
-}
-
-// Install Rust if not already installed
-if (!commandExists('rustup')) {
-  console.log('Installing Rust...');
-  execSync('curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y', { stdio: 'inherit' });
-  execSync('. "$HOME/.cargo/env"', { stdio: 'inherit', shell: '/bin/sh' });
-}
-
-// Add the wasm32-unknown-unknown target if not already added
-if (!execSync('rustup target list').toString().includes('wasm32-unknown-unknown')) {
-  console.log('Adding wasm32-unknown-unknown target...');
-  execSync('rustup target add wasm32-unknown-unknown', { stdio: 'inherit' });
-}
-
-// Install the Stellar CLI if not already installed
-if (!commandExists('stellar')) {
-  console.log('Installing Stellar CLI...');
-  execSync('cargo install --locked stellar-cli --features opt', { stdio: 'inherit' });
-  execSync('. "$HOME/.cargo/env"', { stdio: 'inherit', shell: '/bin/sh' });
-}
-
-// Ensure the environment variables are sourced
-execSync('. "$HOME/.cargo/env"', { stdio: 'inherit', shell: '/bin/sh' });
-
 // variable for later setting pinned version of soroban in "$(dirname/target/bin/soroban)"
 const cli = 'stellar';
 

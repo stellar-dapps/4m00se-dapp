@@ -6,7 +6,7 @@
     "dev": "vite dev",
     "dev:expose": "vite dev --host",
     "build": "npm run check && vite build",
-    "prebuild": "npm run init",
+    "prebuild": "./setup_env.sh",
     "preview": "vite preview",
     "build:widget": "rollup -c",
     "init": "node initialize.js",
