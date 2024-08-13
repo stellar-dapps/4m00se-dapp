@@ -21,6 +21,12 @@ if ! rustup target list | grep -q wasm32-unknown-unknown; then
     rustup target add wasm32-unknown-unknown
 fi
 
+# Verify that the target was added
+if ! rustup target list | grep -q wasm32-unknown-unknown; then
+    echo "Error: wasm32-unknown-unknown target was not added."
+    exit 1
+fi
+
 # Install the Stellar CLI if not already installed
 if ! command_exists stellar; then
     echo "Installing Stellar CLI..."
@@ -30,6 +36,17 @@ fi
 
 # Ensure the environment variables are sourced
 source $HOME/.cargo/env
+
+# Verify that the environment variables are set
+if ! command_exists cargo; then
+    echo "Error: cargo command not found."
+    exit 1
+fi
+
+if ! command_exists stellar; then
+    echo "Error: stellar command not found."
+    exit 1
+fi
 
 # Call the Node.js script
 node initialize.js

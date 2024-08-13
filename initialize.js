@@ -21,7 +21,7 @@ console.log('###################### Initializing ########################');
 const __filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(__filename);
 
-// variable for later setting pinned version of soroban in "$(dirname/target/bin/soroban)"
+// variable for later setting pinned version of soroban in "\$(dirname/target/bin/soroban)"
 const cli = 'stellar';
 
 // Function to execute and log shell commands
