@@ -82,13 +82,19 @@ npm install
 cp .env.example .env
 ```
 
-3. Initiate the contracts to work with
+4. Initialize environment for smart contracts, as mentioned above, if it's not there yet
+
+```bash
+npm run prepare-stellar-env
+```
+
+5. Initiate the contracts and their TS clients for the dapp to work with
 
 ```bash
 npm run init
 ```
 
-4. Start the development server:
+6. Start the development server:
 
 ```bash
 npm run dev
