@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "vite dev",
     "dev:expose": "vite dev --host",
-    "prepare-stellar-env": "./prepare-stellar-env.sh",
     "build": "npm run check && vite build",
     "prebuild": "npm run init",
     "preview": "vite preview",
