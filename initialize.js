@@ -35,7 +35,7 @@ function commandExists(command) {
 if (!commandExists('rustup')) {
   console.log('Installing Rust...');
   execSync('curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y', { stdio: 'inherit' });
-  execSync('source $HOME/.cargo/env', { stdio: 'inherit' });
+  execSync('. "$HOME/.cargo/env"', { stdio: 'inherit', shell: '/bin/sh' });
 }
 
 // Add the wasm32-unknown-unknown target if not already added
@@ -48,11 +48,11 @@ if (!execSync('rustup target list').toString().includes('wasm32-unknown-unknown'
 if (!commandExists('stellar')) {
   console.log('Installing Stellar CLI...');
   execSync('cargo install --locked stellar-cli --features opt', { stdio: 'inherit' });
-  execSync('source $HOME/.cargo/env', { stdio: 'inherit' });
+  execSync('. "$HOME/.cargo/env"', { stdio: 'inherit', shell: '/bin/sh' });
 }
 
 // Ensure the environment variables are sourced
-execSync('source $HOME/.cargo/env', { stdio: 'inherit' });
+execSync('. "$HOME/.cargo/env"', { stdio: 'inherit', shell: '/bin/sh' });
 
 // variable for later setting pinned version of soroban in "$(dirname/target/bin/soroban)"
 const cli = 'stellar';
