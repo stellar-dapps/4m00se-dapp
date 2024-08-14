@@ -38,3 +38,6 @@ packages/*
 # generated contract client imports
 src/contracts/*
 !src/contracts/util.ts
+
+# build-time generated artefacts
+static/widget
