@@ -1,12 +1,13 @@
 {
   "name": "4m00se-dapp",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "type": "module",
   "scripts": {
     "dev": "vite dev",
     "dev:expose": "vite dev --host",
     "build": "npm run check && vite build",
     "prebuild": "./setup_env.sh",
+    "postbuild": "npm run build:widget",
     "preview": "vite preview",
     "build:widget": "rollup -c",
     "init": "node initialize.js",

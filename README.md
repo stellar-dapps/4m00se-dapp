@@ -85,7 +85,7 @@ cp .env.example .env
 4. Initialize environment for smart contracts, as mentioned above, if it's not there yet
 
 ```bash
-npm run prepare-stellar-env
+./setup_env.sh
 ```
 
 5. Initiate the contracts and their TS clients for the dapp to work with
