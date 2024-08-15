@@ -4,14 +4,15 @@ import { json } from '@sveltejs/kit';
 /**
  * This script keeps the Render instance active by periodically pinging the server.
  * It uses the native JavaScript `fetch` API to make an HTTP request to the server
- * every 14 minutes. This prevents the server from spinning down due to inactivity.
+ * every 5 minutes. This prevents the server from spinning down due to inactivity.
+ * (tried 14, but it's not stable)
  *
  * The URL is set to a relative path (`/api/ping`), which means it pings the same
  * endpoint within the same application. This keeps the server active and responsive.
  */
 
 const url = '/api/ping'; // Relative URL to the same endpoint
-const interval = 840000; // Interval in milliseconds (14 minutes)
+const interval = 300000; // Interval in milliseconds (5 min)
 
 // Reloader Function
 async function reloadWebsite(): Promise<void> {
