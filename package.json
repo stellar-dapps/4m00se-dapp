@@ -1,6 +1,6 @@
 {
   "name": "4m00se-dapp",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "type": "module",
   "scripts": {
     "dev": "vite dev",
@@ -18,6 +18,7 @@
   "dependencies": {
     "@picocss/pico": "^2.0.6",
     "@stellar/freighter-api": "^2.0.0",
+    "@stellar/stellar-sdk": "^12.2.0",
     "markdown-it": "^14.1.0",
     "pinata": "^0.1.10"
   },

@@ -43,12 +43,13 @@ export async function getConfig(id?: string) {
 
   const url = `${import.meta.env.VITE_GATEWAY_URL}/ipfs/${jsonCid}`;
 
-  console.log({ url });
+  console.log('IPFS url', { url });
 
   try {
     const response = await fetch(url);
     const data = await response.json();
     console.log(data);
+    return data;
   } catch (error) {
     console.log(error);
   }
