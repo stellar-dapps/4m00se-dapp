@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import helloWorld from '../../contracts/hello_world.ts';
   import Counter from '$lib/components/Counter.svelte';
+  import { createConfig, getConfig, listConfigs } from '$lib/utils/ipfs.ts';
 
   let greeting = '';
 
@@ -13,6 +14,18 @@
       console.error('Error fetching greeting:', error);
     }
   });
+
+  const createTestJSON = () => {
+    createConfig();
+  };
+
+  const getTestJSON = () => {
+    getConfig();
+  };
+
+  const listStoresConfigs = () => {
+    listConfigs();
+  };
 </script>
 
 <svelte:head>
@@ -23,4 +36,15 @@
 
 <section>
   <Counter />
+</section>
+
+<section>
+  <h3>Create test</h3>
+  <button type="button" on:click={createTestJSON}>Create test JSON</button>
+
+  <h3>Get config</h3>
+  <button type="button" class="secondary" on:click={getTestJSON}>Get test JSON</button>
+
+  <h3>List configs</h3>
+  <button type="button" class="contrast" on:click={listStoresConfigs}>List files</button>
 </section>
