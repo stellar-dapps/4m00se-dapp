@@ -2,6 +2,26 @@
   import AuthButton from '$lib/components/AuthButton.svelte';
   import { authStore } from '$lib/stores/auth.store.ts';
   import { page } from '$app/stores';
+  import { onMount } from 'svelte';
+
+  let isMobile = false;
+
+  onMount(() => {
+    const userAgent = navigator.userAgent;
+
+    // Check if the user agent is a mobile device
+    if (
+      userAgent.match(/Android/i) ||
+      userAgent.match(/webOS/i) ||
+      userAgent.match(/iPhone/i) ||
+      userAgent.match(/iPad/i) ||
+      userAgent.match(/iPod/i) ||
+      userAgent.match(/BlackBerry/i) ||
+      userAgent.match(/Windows Phone/i)
+    ) {
+      isMobile = true;
+    }
+  });
 
   let isAuthenticated: boolean;
 
@@ -31,4 +51,6 @@
   >
 </li>
 
-<li><AuthButton /></li>
+{#if !isMobile}
+  <li><AuthButton /></li>
+{/if}
