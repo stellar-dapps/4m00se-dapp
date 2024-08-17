@@ -3,6 +3,7 @@
   import { authStore } from '$lib/stores/auth.store.ts';
   import { page } from '$app/stores';
   import { onMount } from 'svelte';
+  import { goto } from '$app/navigation';
 
   let isMobile = false;
 
@@ -28,9 +29,19 @@
   authStore.subscribe((value) => {
     isAuthenticated = value.isAuthenticated;
   });
+
+  function goToApp() {
+    goto('/app');
+  }
 </script>
 
-{#if isAuthenticated}
+{#if $page.url.pathname === '/app'}
+  <li>
+    <input type="search" name="search" placeholder="Search" aria-label="Search" />
+  </li>
+{/if}
+
+{#if isAuthenticated && $page.url.pathname !== '/app'}
   <li><a href="/dashboard" class="secondary" class:contrast={$page.url.pathname === '/dashboard'}>Dashboard</a></li>
   <li>
     <a href="/form-builder" class="secondary" class:contrast={$page.url.pathname === '/form-builder'}>Form Builder</a>
@@ -43,14 +54,25 @@
     <a href="/contract-test" class="secondary" class:contrast={$page.url.pathname === '/contract-test'}>TEMP</a>
   </li>
 {/if}
-<li><a href="/docs" class="secondary" class:contrast={$page.url.pathname === '/docs'}>Get Started</a></li>
-<li><a href="https://github.com/stellar-dapps/4m00se" class="secondary" target="_blank">GitHub ↗️</a></li>
 <li>
-  <a href="/demo/Stellar _ Build Better on Stellar_ Smart Contract Challenge.html" class="secondary" target="_blank"
-    >Demo ↗️</a
+  <a href="/docs" class="secondary" class:contrast={$page.url.pathname === '/docs'}
+    >{$page.url.pathname === '/app' ? 'Documentation' : 'Get Started'}</a
   >
 </li>
 
+{#if $page.url.pathname !== '/app'}
+  <li><a href="https://github.com/stellar-dapps/4m00se-dapp" class="secondary" target="_blank">GitHub ↗️</a></li>
+  <li>
+    <a href="/demo/Stellar _ Build Better on Stellar_ Smart Contract Challenge.html" class="secondary" target="_blank"
+      >Demo ↗️</a
+    >
+  </li>
+{/if}
+
 {#if !isMobile}
-  <li><AuthButton /></li>
+  {#if isAuthenticated && $page.url.pathname !== '/app'}
+    <li><button type="button" on:click={goToApp}>4m00se app</button></li>
+  {:else}
+    <li><AuthButton /></li>
+  {/if}
 {/if}

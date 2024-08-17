@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import FreighterAPI from '@stellar/freighter-api';
   import { authStore } from '$lib/stores/auth.store.ts';
+  import { goto } from '$app/navigation';
 
   const { isAllowed, setAllowed, getUserInfo, isConnected } = FreighterAPI;
 
@@ -59,6 +60,7 @@
     stellarPublicKey = publicKey;
     authStore.set({ isAuthenticated: true, user: publicKey, authBlockedReason: null });
     isWalledActionInProgress = false;
+    goto('/app');
   }
 
   function setWalletIsLocked() {
