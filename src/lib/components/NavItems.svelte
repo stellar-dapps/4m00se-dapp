@@ -35,13 +35,13 @@
   }
 </script>
 
-{#if $page.url.pathname === '/app'}
+{#if $page.url.pathname.includes('/app')}
   <li>
     <input type="search" name="search" placeholder="Search" aria-label="Search" />
   </li>
 {/if}
 
-{#if isAuthenticated && $page.url.pathname !== '/app'}
+{#if isAuthenticated && !$page.url.pathname.includes('/app')}
   <li><a href="/dashboard" class="secondary" class:contrast={$page.url.pathname === '/dashboard'}>Dashboard</a></li>
   <li>
     <a href="/form-builder" class="secondary" class:contrast={$page.url.pathname === '/form-builder'}>Form Builder</a>
@@ -56,11 +56,11 @@
 {/if}
 <li>
   <a href="/docs" class="secondary" class:contrast={$page.url.pathname === '/docs'}
-    >{$page.url.pathname === '/app' ? 'Documentation' : 'Get Started'}</a
+    >{$page.url.pathname.includes('/app') ? 'Documentation' : 'Get Started'}</a
   >
 </li>
 
-{#if $page.url.pathname !== '/app'}
+{#if !$page.url.pathname.includes('/app')}
   <li><a href="https://github.com/stellar-dapps/4m00se-dapp" class="secondary" target="_blank">GitHub ↗️</a></li>
   <li>
     <a href="/demo/Stellar _ Build Better on Stellar_ Smart Contract Challenge.html" class="secondary" target="_blank"
@@ -70,9 +70,22 @@
 {/if}
 
 {#if !isMobile}
-  {#if isAuthenticated && $page.url.pathname !== '/app'}
+  {#if isAuthenticated && !$page.url.pathname.includes('/app')}
     <li><button type="button" on:click={goToApp}>4m00se app</button></li>
   {:else}
     <li><AuthButton /></li>
   {/if}
 {/if}
+
+<style>
+  @media (max-width: 1024px) {
+    input[type='search'] {
+      width: 8rem;
+    }
+  }
+  @media (max-width: 640px) {
+    input[type='search'] {
+      display: none;
+    }
+  }
+</style>

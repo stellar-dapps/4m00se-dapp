@@ -9,6 +9,7 @@
 - [ ] i18n for main target audience
 - [ ] a11y requirements
 - [ ] Personas and main user stories for testing and implementation (admin / customer / user)
+- [ ] Play around blockchain data immutability
 
 ## UI
 
@@ -76,6 +77,8 @@
 - [ ] Add e2e/component tests for specific features / components
 - [ ] Automated performance benchmarking, especially for the widget
 - [ ] Commit indicators for the deployed app
+- [ ] Migrate to Svelte 5
+- [ ] Integrate headless components
 
 ## Documentation
 

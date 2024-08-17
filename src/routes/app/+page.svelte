@@ -24,7 +24,7 @@
 </svelte:head>
 
 {#if !forms?.length}
-  <EmptyState />
+  <EmptyState onCtaTrigger={() => goto('/app/form')} />
 {:else}
   <!-- form card list -->
 {/if}
