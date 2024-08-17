@@ -1,6 +1,6 @@
 <script lang="ts">
   import MarkdownIt from 'markdown-it';
-  import my_markdown from '$lib/content/docs/getting-started.md?raw';
+  import my_markdown from '/README.md?raw';
 
   const md = new MarkdownIt();
 </script>
