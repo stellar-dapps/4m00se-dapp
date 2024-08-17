@@ -9,7 +9,7 @@
 - [ ] i18n for main target audience
 - [ ] a11y requirements
 - [ ] Personas and main user stories for testing and implementation (admin / customer / user)
-- [ ] Play around blockchain data immutability
+- [ ] Play around blockchain data immutability (metadata as flags specifically)
 - [ ] More meaningful template list
 - [ ] Dogfood by collecting dapp feedback with a pop-up widget
 
@@ -23,6 +23,7 @@
 - [ ] Polish alfa version alert and logged-in alert banners, show conditionally with adjusted content
 - [ ] Profile page
 - [ ] Dark/light mode switcher
+- [ ] Drag-n-drop for form builder
 
 ## Soroban smart contracts
 
