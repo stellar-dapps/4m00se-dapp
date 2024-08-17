@@ -1,6 +1,6 @@
 # 4m00se-dapp
 
-4m00se is a decentralized application (dApp) built on the Stellar network. It consists of a form builder and form submission reader functionality, with additional generic pages like documentation. The application is server-rendered and decentralized, utilizing the Stellar network for data storage and IPFS for additional data handling.
+4m00se is a decentralized application (dApp) built on the Stellar network. It consists of a form builder and form submission reader functionality, tied together via embeddable form widgets. The application is server-rendered and decentralized, utilizing the Stellar network and Soroban for blockchain transaction management and IPFS for form configuration storage and submission collecting.
 
 ## Table of Contents
 
@@ -19,10 +19,10 @@
 
 ## Features
 
-- **Form Builder**: Create custom forms with ease.
-- **Form Submission Reader**: Read and manage form submissions.
-- **Decentralized Storage**: All data is stored as transactions on the Stellar network or written to IPFS.
-- **Embeddable Widget**: Easily embed forms into other applications.
+- **Form builder**: Create custom forms with ease.
+- **Form submission reader**: Read and manage form submissions.
+- **Decentralized storage**: All data is stored as transactions on the Stellar network or written to IPFS.
+- **Embeddable widgets**: Easily embed forms into other applications.
 - **Documentation**: Comprehensive documentation for users and developers.
 
 ## Technology Stack
@@ -50,7 +50,7 @@
 
 - **Data Storage**:
   - Stellar Network
-  - IPFS
+  - IPFS (via Pinata API/SDK)
 
 ## Installation
 
@@ -107,6 +107,7 @@ npm run dev
 - Navigate to the form builder page.
 - Create a new form by adding fields and configuring options.
 - Save the form to the Stellar network.
+- Get embeddable widget code and instructions.
 
 ### Form Submission Reader
 
@@ -118,7 +119,7 @@ npm run dev
 1. Include the widget from CDN in your application by adding the following script tag
 
 ```html
-<script src="https://your-domain.com/path-to-widget.js"></script>
+<script src="https://4m.lol/widget/4m00s.js"></script>
 ```
 
 2. Initialize the widget with the desired configuration
@@ -136,6 +137,10 @@ npm run dev
 3. Form configuration
 
 You can configure the following parameters of a form widget... (TBD)
+
+### Examples
+
+See `/static/demo/...` for real-life usage examples.
 
 ## Project Structure
 
@@ -186,7 +191,7 @@ You can configure the following parameters of a form widget... (TBD)
 
 ## Contributing
 
-Contributions are welcome! Please refer to [CONTRIBUTING.md](CONTRIBUTING.md).
+Contributions are welcome! Please refer to [CONTRIBUTING.md](docs/CONTRIBUTING.md).
 
 ## License
 
