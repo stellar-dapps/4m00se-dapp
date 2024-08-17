@@ -29,21 +29,21 @@
     }
   });
 
+  function setAuthBlockedReason(reason: string) {
+    authStore.update((state) => ({
+      ...state,
+      authBlockedReason: reason
+    }));
+  }
+
   async function getStellarPublicKey() {
     const { publicKey } = await getUserInfo();
     return publicKey;
   }
 
-  async function setLoggedIn(publicKey: string) {
-    isButtonDisabled = true;
-    buttonText = `Signed in as ${publicKey}`;
-    stellarPublicKey = publicKey;
-    authStore.set({ isAuthenticated: true, user: publicKey });
-    isWalledActionInProgress = false;
-  }
-
   async function handleSignIn() {
     isWalledActionInProgress = true;
+    setAuthBlockedReason(`Waiting for Freighter sign in. Refresh the page in case of any issues.`);
     if (await isConnected()) {
       await setAllowed();
       const publicKey = await getStellarPublicKey();
@@ -53,15 +53,29 @@
     }
   }
 
+  async function setLoggedIn(publicKey: string) {
+    isButtonDisabled = true;
+    buttonText = publicKey;
+    stellarPublicKey = publicKey;
+    authStore.set({ isAuthenticated: true, user: publicKey, authBlockedReason: null });
+    isWalledActionInProgress = false;
+  }
+
   function setWalletIsLocked() {
     isButtonDisabled = true;
-    buttonText = 'Freighter is locked. Sign in & refresh the page.';
+    buttonText = 'Freighter locked';
+    setAuthBlockedReason(
+      `Freighter extension is locked. Sign in to your Freighter wallet and refresh the page to access all features.`
+    );
     isWalledActionInProgress = false;
   }
 
   function setWalletIsNotAvailable() {
     isButtonDisabled = true;
-    buttonText = 'Freighter is not found. Install & refresh the page.';
+    buttonText = 'Freighter not found';
+    setAuthBlockedReason(
+      `Freighter extension not found. <a href="https://www.freighter.app/" target="_blank">Install it</a> and refresh the page to access all features.`
+    );
     isWalledActionInProgress = false;
   }
 </script>

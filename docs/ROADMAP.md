@@ -2,7 +2,8 @@
 
 ## UI
 
-- [ ] Polish alfa version alert banner, show conditionally with adjusted content
+- [ ] Polish alfa version alert and logged-in alert banners, show conditionally with adjusted content
+- [ ] Profile page
 
 ## Widget
 

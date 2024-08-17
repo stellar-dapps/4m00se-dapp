@@ -5,6 +5,13 @@
   import Header from '$lib/components/Header.svelte';
   import Footer from '$lib/components/Footer.svelte';
   import Banner from '$lib/components/Banner.svelte';
+  import { authStore } from '$lib/stores/auth.store.ts';
+
+  let authBlockedReason: string | null;
+
+  authStore.subscribe((value) => {
+    authBlockedReason = value.authBlockedReason;
+  });
 </script>
 
 <svelte:head>
@@ -16,7 +23,11 @@
 
 <Header />
 
-<Banner />
+<Banner isWarning />
+
+{#if authBlockedReason}
+  <Banner bannerText={authBlockedReason} />
+{/if}
 
 <main class="container">
   <slot />
