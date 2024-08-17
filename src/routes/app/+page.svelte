@@ -2,6 +2,9 @@
   import { onMount } from 'svelte';
   import { authStore } from '$lib/stores/auth.store.ts';
   import { goto } from '$app/navigation';
+  import EmptyState from '$lib/components/EmptyState.svelte';
+
+  const forms: any[] = [];
 
   onMount(() => {
     let isAuthenticated;
@@ -20,4 +23,8 @@
   <title>4m00se — Dashboard</title>
 </svelte:head>
 
-<h1>Welcome to the app</h1>
+{#if !forms?.length}
+  <EmptyState />
+{:else}
+  <!-- form card list -->
+{/if}
