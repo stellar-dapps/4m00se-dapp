@@ -74,6 +74,7 @@
 - [ ] Add unit tests for major business logic
 - [ ] Add e2e/component tests for specific features / components
 - [ ] Automated performance benchmarking, especially for the widget
+- [ ] Commit indicators for the deployed app
 
 ## Documentation
 
