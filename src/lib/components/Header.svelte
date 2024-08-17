@@ -5,12 +5,13 @@
   import type { FormConfig } from '$lib/models/form-config.model.ts';
   import { mockFormConfigs } from '$lib/content/mocks/mock-configuration-list.ts';
   import { goto } from '$app/navigation';
+  import EditableText from '$lib/components/EditableText.svelte';
 
   let isWideScreen = true;
 
   // TODO get everything from form store
-  const currentFormName = 'My new form name';
-  const currentFormDescription = 'My new form description';
+  let currentFormName = 'My new form name';
+  let currentFormDescription = `<no description>`;
   const formElements: any[] = [];
   const isNewForm = false;
 
@@ -20,6 +21,14 @@
       window.addEventListener('resize', handleResize);
     }
   });
+
+  function updateCurrentFormName(newName: string) {
+    currentFormName = newName;
+  }
+
+  function updateCurrentFormDescription(newDescription: string) {
+    currentFormDescription = newDescription;
+  }
 
   function handleResize() {
     if (typeof window !== 'undefined') {
@@ -45,8 +54,8 @@
     <nav class="context">
       <ul>
         <li>
-          <h1>{currentFormName}</h1>
-          {#if currentFormDescription}<div>{currentFormDescription}</div>{/if}
+          <h1><EditableText text={currentFormName} onEdited={updateCurrentFormName} /></h1>
+          <div><EditableText text={currentFormDescription} onEdited={updateCurrentFormDescription} /></div>
         </li>
       </ul>
       <ul>

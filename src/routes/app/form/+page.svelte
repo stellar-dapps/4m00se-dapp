@@ -3,6 +3,20 @@
   import EmptyState from '$lib/components/EmptyState.svelte';
 
   const elements: any[] = [];
+  const options: any[] = [
+    {
+      title: 'Text',
+      id: '1'
+    },
+    {
+      title: 'Checkbox',
+      id: '2'
+    }
+  ];
+
+  function handleElementAdd(option) {
+    console.log('requested ', option.title);
+  }
 </script>
 
 <svelte:head>
@@ -14,8 +28,9 @@
     mainTitle="No form elements yet"
     mainSubTitle="You haven't added any form elements yet. Click the button below to get started."
     ctaTitle="+ Add element"
-    onCtaTrigger={() => goto('/app/form')}
+    ctaOptions={options}
+    onDropdownCtaTrigger={handleElementAdd}
   />
 {:else}
-  <!-- form card list -->
+  <!-- element card list -->
 {/if}

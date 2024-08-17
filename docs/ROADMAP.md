@@ -2,7 +2,7 @@
 
 ## Product
 
-- [ ] Hosted forms
+- [ ] Hosted forms ([Fleek](https://fleek.co/) possibly)
 - [ ] Using for blog-like website comments
 - [ ] Embeddings tracking — info for customers where their form is used and how
 - [ ] CSV/JSON export of form submissions
@@ -10,6 +10,8 @@
 - [ ] a11y requirements
 - [ ] Personas and main user stories for testing and implementation (admin / customer / user)
 - [ ] Play around blockchain data immutability
+- [ ] More meaningful template list
+- [ ] Dogfood by collecting dapp feedback with a pop-up widget
 
 ## UI
 
@@ -25,6 +27,7 @@
 ## Soroban smart contracts
 
 - [ ] Flexible smart contract with parameters allowing for paid/sponsored submission
+- [ ] Consider providing more sophisticated deployer contract
 - [ ] Monetization (consider possibilities for product/customers/users) with stuff like form creation fees, limits for number of submissions, custom asset names, etc.
 
 ## Stellar flow
@@ -74,15 +77,19 @@
 - [ ] Thorough error processing
 - [ ] Consider proper monitoring and error tracking
 - [ ] Add unit tests for major business logic
+- [ ] Build component library with StoryBook for isolated development and testing the most important components
 - [ ] Add e2e/component tests for specific features / components
 - [ ] Automated performance benchmarking, especially for the widget
 - [ ] Commit indicators for the deployed app
 - [ ] Migrate to Svelte 5
 - [ ] Integrate headless components
+- [ ] Proper parametrized routing
 
 ## Documentation
 
 - [ ] Polish README documentation display on the website
+- [ ] Add architecture description
+- [ ] Add tutorial
 - [ ] Consider separate documentation page
 - [ ] Annotate project structure
 - [ ] Interactive onboarding flow
@@ -90,10 +97,12 @@
 ## Repository
 
 - [ ] Isolate local and CI/CD scripts
+- [ ] Add custom labels and automation for them
+- [ ] Add simple code style guide
 
 ## Marketing and demos
 
 - [ ] Blog page
 - [ ] Guest book as a demo form with interactive results
-- [ ] Open source starter template as a promo
+- [ ] Open source starter template as a promo, tutorial for that
 - [ ] Comparison with other onchain/offchain solutions
