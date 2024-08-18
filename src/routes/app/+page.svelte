@@ -88,6 +88,15 @@
 
     loadForms(publicKey!);
   });
+
+  function triggerFormCreate() {
+    formStore.update((state) => ({
+      ...state,
+      selectedAsset: null,
+      formSubmissionsForSelectedAsset: []
+    }));
+    goto('/app/form');
+  }
 </script>
 
 <svelte:head>
@@ -95,7 +104,7 @@
 </svelte:head>
 
 {#if !$formStore.formAssets?.length}
-  <EmptyState onCtaTrigger={() => goto('/app/form')} />
+  <EmptyState onCtaTrigger={triggerFormCreate} />
 {:else}
   <h1>You have {$formStore.formAssets.length} forms</h1>
   <ul class="list-unstyled">
@@ -108,7 +117,7 @@
       </li>
     {/each}
   </ul>
-  <button type="button" on:click={() => goto('/app/form')}>+ Add form</button>
+  <button type="button" on:click={triggerFormCreate}>+ Add form</button>
 {/if}
 
 <style>

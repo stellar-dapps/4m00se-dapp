@@ -8,6 +8,8 @@
   import EditableText from '$lib/components/EditableText.svelte';
   import { formStore } from '$lib/stores/form.store.ts';
   import Logo from '$lib/components/img/Logo.svelte';
+  import Back from '$lib/components/img/Back.svelte';
+  import Submitted from '$lib/components/Submitted.svelte';
 
   let isWideScreen = true;
 
@@ -18,7 +20,7 @@
   const isNewForm = false;
 
   formStore.subscribe((value) => {
-    currentFormName = value.selectedAsset?.asset_code ?? 'N/A';
+    currentFormName = value.selectedAsset?.asset_code ?? 'N/A*';
     currentFormDescription = value.selectedAsset?.ipfsData?.name ?? 'N/A';
   });
 
@@ -54,36 +56,59 @@
   {#if $page.url.pathname.includes('/app/form')}
     <nav class="context">
       <ul>
-        <li><a href="/app" class="contrast"><strong>{`< Forms`}</strong></a></li>
+        <li>
+          <a href="/app" class="contrast">
+            <Back />
+          </a>
+        </li>
       </ul>
       <ul></ul>
     </nav>
     <nav class="context">
       <ul>
         <li>
-          <h1><EditableText text={currentFormName} onEdited={updateCurrentFormName} /></h1>
-          <div><EditableText text={currentFormDescription} onEdited={updateCurrentFormDescription} /></div>
+          <h1>
+            {#if !$formStore.selectedAsset}
+              <EditableText text={currentFormName} onEdited={updateCurrentFormName} />
+            {:else}
+              {currentFormName}
+            {/if}
+          </h1>
+          <div>
+            {#if !$formStore.selectedAsset}
+              <EditableText text={currentFormDescription} onEdited={updateCurrentFormDescription} />
+            {:else}
+              {currentFormDescription}
+            {/if}
+          </div>
         </li>
       </ul>
-      <ul>
-        <li><button type="button" class="secondary" disabled={!formElements?.length}>Preview</button></li>
-        <li><button type="button" disabled={!formElements?.length}>Save</button></li>
-      </ul>
+      {#if !$page.url.pathname.includes('/app/form/submissions')}
+        <ul>
+          {#if !$formStore.selectedAsset}
+            <li><button type="button" class="secondary" disabled={!formElements?.length}>Preview</button></li>
+            <li><button type="button" disabled={!formElements?.length}>Save</button></li>
+          {/if}
+          {#if $formStore.selectedAsset}
+            <li><Submitted /></li>
+          {/if}
+        </ul>
+      {/if}
     </nav>
     <nav>
-      <ul>
+      <ul class="tabs">
         <li>
           <div role="group">
             <button
               type="button"
               on:click={() => goto('/app/form')}
-              class={!$page.url.pathname.includes('submissions') ? 'outline' : 'outline secondary'}
+              class={!$page.url.pathname.includes('submissions') ? 'secondary' : 'outline secondary'}
               >Form elements</button
             >
             <button
               type="button"
               on:click={() => goto('/app/form/submissions')}
-              class={$page.url.pathname.includes('submissions') ? 'outline' : 'outline secondary'}
+              class={$page.url.pathname.includes('submissions') ? 'secondary' : 'outline secondary'}
               disabled={isNewForm}>Responses</button
             >
           </div>
@@ -117,5 +142,11 @@
 <style>
   nav ul:first-child li a {
     text-decoration: none;
+  }
+  .tabs {
+    min-width: 50%;
+  }
+  .tabs li {
+    width: 100%;
   }
 </style>

@@ -2,6 +2,7 @@
   import EmptyState from '$lib/components/EmptyState.svelte';
 
   const elements: any[] = [];
+
   const options: any[] = [
     {
       title: 'Base text field',

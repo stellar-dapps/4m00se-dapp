@@ -24,6 +24,7 @@
 - [ ] Profile page
 - [ ] Dark/light mode switcher
 - [ ] Drag-n-drop for form builder
+- [ ] Pagination
 
 ## Soroban smart contracts
 
