@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import helloWorld from '../../contracts/hello_world.ts';
   import Counter from '$lib/components/Counter.svelte';
-  import { createConfig, getConfig, listConfigs } from '$lib/utils/ipfs.ts';
+  import { createConfig, getFormConfigFromIpfs, listConfigs } from '$lib/utils/ipfs.ts';
   import { generateRandomAssetId } from '$lib/utils/asset-id-generator.ts';
   import { authStore } from '$lib/stores/auth.store.ts';
   import CreateAsset from '$lib/components/test/CreateAsset.svelte';
@@ -47,7 +47,7 @@
       <button type="button" on:click={createConfig}>Create test JSON</button>
 
       <h4>Get config</h4>
-      <button type="button" class="secondary" on:click={() => getConfig()}>Get test JSON</button>
+      <button type="button" class="secondary" on:click={() => getFormConfigFromIpfs()}>Get test JSON</button>
 
       <h4>List configs</h4>
       <button type="button" class="contrast" on:click={listConfigs}>Get IPFS file data</button>

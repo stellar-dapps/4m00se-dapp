@@ -34,7 +34,7 @@ export async function listConfigs() {
 //   }
 // }
 
-export async function getConfig(id?: string) {
+export async function getFormConfigFromIpfs(id?: string) {
   let jsonCid = id;
   if (!jsonCid) {
     // TODO return actually
@@ -42,8 +42,6 @@ export async function getConfig(id?: string) {
   }
 
   const url = `${import.meta.env.VITE_GATEWAY_URL}/ipfs/${jsonCid}`;
-
-  console.log('IPFS url', { url });
 
   try {
     const response = await fetch(url);

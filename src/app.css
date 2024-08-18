@@ -22,3 +22,13 @@ main {
 h1 {
   text-align: center;
 }
+
+.list-unstyled {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.list-unstyled li::marker {
+  content: none;
+}

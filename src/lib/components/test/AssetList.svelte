@@ -1,6 +1,6 @@
 <script lang="ts">
   import { authStore } from '$lib/stores/auth.store.ts';
-  import { getConfig } from '$lib/utils/ipfs.ts';
+  import { getFormConfigFromIpfs } from '$lib/utils/ipfs.ts';
 
   let publicKey: string;
 
@@ -41,7 +41,7 @@
         const cid = accountData[cidKey];
         const decodedCid = decodeBase64(cid);
         if (decodedCid) {
-          const ipfsData = await getConfig(decodedCid);
+          const ipfsData = await getFormConfigFromIpfs(decodedCid);
           console.log(ipfsData);
           asset.ipfsData = ipfsData;
           console.log({ asset });
