@@ -1,4 +1,51 @@
 import type { FormConfig } from '$lib/models/form-config.model.ts';
+import FreighterAPI from '@stellar/freighter-api';
+
+const { signTransaction, setAllowed, getUserInfo, isConnected } = FreighterAPI;
+
+async function connectWallet() {
+  if (await isConnected()) {
+    await setAllowed();
+    return await getUserInfo();
+  }
+}
+
+async function signSubmissionTransaction(assetId: string) {
+  let publicKey: string = '';
+  const walletConnectResult = await connectWallet();
+
+  if (walletConnectResult) {
+    publicKey = walletConnectResult.publicKey;
+  }
+
+  const transactionResponse: any = await buildTransaction(publicKey, assetId);
+
+  const transaction = await transactionResponse.json();
+
+  // Sign the transaction using Freighter API
+  const signedTransaction = await signTransaction(transaction.xdr, {
+    accountToSign: publicKey,
+    network: 'https://horizon-testnet.stellar.org',
+    networkPassphrase: 'Test SDF Network ; September 2015'
+  });
+
+  return signedTransaction;
+}
+
+async function buildTransaction(publicKey: string, assetId: string) {
+  const response = await fetch('https://localhost:5173/api/stellar/create-submission-transaction', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      publicKey,
+      assetId
+    })
+  });
+
+  return response;
+}
 
 export async function getFormConfig(configUrl: string): Promise<FormConfig | null> {
   try {
@@ -6,15 +53,15 @@ export async function getFormConfig(configUrl: string): Promise<FormConfig | nul
     const formConfigData: FormConfig = await response.json();
     return formConfigData;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return null;
   }
 }
 
 export async function onSubmitDefault(formData: any, formConfig: FormConfig) {
-  console.log('default callback triggered with: ', { formData, formConfig });
-
   const { createdBy, id } = formConfig;
+
+  const tx = await signSubmissionTransaction(formConfig.name);
 
   const response = await fetch('https://localhost:5173/api/stellar/submit-form-data', {
     method: 'POST',
@@ -24,7 +71,8 @@ export async function onSubmitDefault(formData: any, formConfig: FormConfig) {
     body: JSON.stringify({
       formData,
       assetCode: id,
-      assetIssuer: createdBy
+      assetIssuer: createdBy,
+      tx
     })
   });
 

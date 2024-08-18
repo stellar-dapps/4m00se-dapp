@@ -1,5 +1,4 @@
-import { PinataSDK } from 'pinata';
-import { mockStellarConfig } from '$lib/content/mocks/stellar-config.ts';
+import { PinataSDK, type PinListItem } from 'pinata';
 import type { PinataResponse } from '$lib/models/pinata-response.model.ts';
 import type { FormConfig } from '$lib/models/form-config.model.ts';
 
@@ -21,24 +20,32 @@ export async function createIpfsFormConfigRecord(config: FormConfig): Promise<Pi
   }
 }
 
-export async function listConfigs() {
+export async function listConfigs(cid: string) {
   try {
-    const file = await pinata.listFiles().cid('bafkreicv32orr7mardh6mioh2r5nls74lgu3gcle3pm7tnvbqpj76rxkne');
+    const file = await pinata.listFiles().cid(cid);
     console.log(file);
+    return file;
   } catch (error) {
     console.log(error);
   }
 }
 
-// REQUIRES CORS ENABLED?
-// export async function getConfig() {
-//   try {
-//     const file = await pinata.gateways.get('bafkreicv32orr7mardh6mioh2r5nls74lgu3gcle3pm7tnvbqpj76rxkne');
-//     console.log(file);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
+export async function listIpfsConfigs(assetCode: string): Promise<PinListItem[]> {
+  const files: PinListItem[] = await pinata.listFiles().name(assetCode);
+  return files;
+}
+
+export async function updateMetadata(cid: string, name: string, submissions: string) {
+  const update = await pinata.updateMetadata({
+    cid,
+    name,
+    keyValues: {
+      submissions: submissions
+    }
+  });
+
+  return update;
+}
 
 export async function getFormConfigFromIpfs(id?: string) {
   let jsonCid = id;

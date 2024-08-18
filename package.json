@@ -1,6 +1,6 @@
 {
   "name": "4m00se-dapp",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "type": "module",
   "scripts": {
     "dev": "vite dev",

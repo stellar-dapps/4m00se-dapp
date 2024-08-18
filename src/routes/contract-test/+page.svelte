@@ -51,7 +51,12 @@
       <button type="button" class="secondary" on:click={() => getFormConfigFromIpfs()}>Get test JSON</button>
 
       <h4>List configs</h4>
-      <button type="button" class="contrast" on:click={listConfigs}>Get IPFS file data</button>
+      <button
+        type="button"
+        class="contrast"
+        on:click={() => listConfigs('bafkreicv32orr7mardh6mioh2r5nls74lgu3gcle3pm7tnvbqpj76rxkne')}
+        >Get IPFS file data</button
+      >
     </section>
   </article>
 

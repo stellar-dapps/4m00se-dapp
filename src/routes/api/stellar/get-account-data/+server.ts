@@ -8,15 +8,12 @@ export const GET: RequestHandler = async ({ request }) => {
   const { searchParams } = new URL(request.url);
   const publicKey = searchParams.get('publicKey');
 
-  console.log('account data public key', publicKey);
-
   if (!publicKey) {
     return new Response(JSON.stringify({ error: 'Missing publicKey' }), { status: 400 });
   }
 
   try {
     const account = await server.loadAccount(publicKey);
-    console.log('on the server...', { account });
     return new Response(JSON.stringify(account.data_attr), { status: 200 });
   } catch (error: any) {
     return new Response(JSON.stringify({ error: error.message }), { status: 500 });
