@@ -25,6 +25,7 @@
 - [ ] Dark/light mode switcher
 - [ ] Drag-n-drop for form builder
 - [ ] Pagination
+- [ ] Styling tab for form builder
 
 ## Soroban smart contracts
 

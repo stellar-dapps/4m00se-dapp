@@ -23,6 +23,10 @@ h1 {
   text-align: center;
 }
 
+h1.left {
+  text-align: left;
+}
+
 .list-unstyled {
   list-style: none;
   margin-left: 0;
@@ -37,7 +41,8 @@ h1 {
   width: 12rem;
 }
 
-:root {
+/* Default picoCSS colors for reference */
+/*:root {
   --pico-background-color: #fff;
   --pico-color: #373c44;
   --pico-text-selection-color: rgba(2, 154, 232, 0.25);
@@ -140,4 +145,4 @@ h1 {
   --pico-progress-color: var(--pico-primary-background);
   --pico-tooltip-background-color: var(--pico-contrast-background);
   --pico-tooltip-color: var(--pico-contrast-inverse);
-}
+}*/

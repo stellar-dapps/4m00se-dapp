@@ -13,4 +13,5 @@ export interface StellarAccountAsset {
   asset_code: string;
   asset_issuer: string;
   ipfsData?: FormConfig | null; // augmented on UI
+  cid?: string | null; // augmented on UI
 }

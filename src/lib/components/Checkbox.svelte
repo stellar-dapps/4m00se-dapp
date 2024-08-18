@@ -1,8 +1,8 @@
 <script lang="ts">
   export let label;
-  export let name;
-  export let checked;
-  export let onChange;
+  export let name = '';
+  export let checked = false;
+  export let onChange = (event: any) => {};
 
   function handleChange(event: Event) {
     const target = event.target as HTMLInputElement;

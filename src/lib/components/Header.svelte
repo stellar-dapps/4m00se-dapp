@@ -17,11 +17,11 @@
   let currentFormName = 'My new form name';
   let currentFormDescription = `<no description>`;
   const formElements: any[] = [];
-  const isNewForm = false;
 
   formStore.subscribe((value) => {
-    currentFormName = value.selectedAsset?.asset_code ?? 'N/A*';
-    currentFormDescription = value.selectedAsset?.ipfsData?.name ?? 'N/A';
+    currentFormName = value.selectedAsset?.ipfsData?.name ?? 'N/A*';
+    currentFormDescription =
+      (value.selectedAsset?.ipfsData?.description ?? value.selectedAsset) ? 'No description' : 'N/A';
   });
 
   onMount(() => {
@@ -109,7 +109,7 @@
               type="button"
               on:click={() => goto('/app/form/submissions')}
               class={$page.url.pathname.includes('submissions') ? 'secondary' : 'outline secondary'}
-              disabled={isNewForm}>Responses</button
+              disabled={!$formStore.selectedAsset}>Responses</button
             >
           </div>
         </li>

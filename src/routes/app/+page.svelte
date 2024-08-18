@@ -3,12 +3,13 @@
   import { authStore } from '$lib/stores/auth.store.ts';
   import { goto } from '$app/navigation';
   import EmptyState from '$lib/components/EmptyState.svelte';
-  import { getFormConfigFromIpfs } from '$lib/utils/ipfs.ts';
+  import { getFormConfigFromIpfs, listIpfsConfigs } from '$lib/utils/ipfs.ts';
   import { decodeBase64 } from '$lib/utils/decoder.ts';
   import { handleFakeFormCreate } from '$lib/utils/form-create-manager.ts';
   import { formStore } from '$lib/stores/form.store.ts';
   import type { StellarAccountAsset } from '$lib/models/stellar-account-asset.model.ts';
   import type { FormConfig } from '$lib/models/form-config.model.ts';
+  import type { PinataFile } from '$lib/models/pinata-response.model.ts';
 
   let publicKey: string | null = null;
   let forms: StellarAccountAsset[] = [];
@@ -44,6 +45,7 @@
       if (decodedCid) {
         const ipfsData: FormConfig | null = await getFormConfigFromIpfs(decodedCid);
         asset.ipfsData = ipfsData;
+        asset.cid = decodedCid;
       }
       return asset;
     });
@@ -65,11 +67,28 @@
     }));
   }
 
-  function handleFormSelection(form: StellarAccountAsset) {
+  async function handleFormSelection(form: StellarAccountAsset) {
     formStore.update((state) => ({
       ...state,
       selectedAsset: form
     }));
+
+    const configsFromIpfs: any[] = await listIpfsConfigs(form.asset_code);
+
+    const configOfInterest: PinataFile = configsFromIpfs?.find((config) => config.metadata.name === form.asset_code);
+
+    if (configOfInterest) {
+      const formSubmissionsForSelectedAsset = configOfInterest?.metadata?.keyvalues?.submissions
+        ? JSON.parse(configOfInterest?.metadata?.keyvalues?.submissions)
+        : [];
+
+      if (formSubmissionsForSelectedAsset) {
+        formStore.update((state) => ({
+          ...state,
+          formSubmissionsForSelectedAsset
+        }));
+      }
+    }
 
     goto('/app/form');
   }
@@ -106,13 +125,17 @@
 {#if !$formStore.formAssets?.length}
   <EmptyState onCtaTrigger={triggerFormCreate} />
 {:else}
-  <h1>You have {$formStore.formAssets.length} forms</h1>
+  <h1 class="left">{$formStore.formAssets.length} forms</h1>
   <ul class="list-unstyled">
     {#each $formStore.formAssets as form}
       <li>
         <article on:click={() => handleFormSelection(form)}>
-          <h6>{form?.asset_code}</h6>
-          <div>{form?.ipfsData?.name}</div>
+          <div class="form-name">
+            <h5>{form?.ipfsData?.name}</h5>
+            <h5 class="additional">|</h5>
+            <h5 class="additional">{form?.asset_code}</h5>
+          </div>
+          <div>{form?.ipfsData?.description || 'No description'}</div>
         </article>
       </li>
     {/each}
@@ -123,5 +146,10 @@
 <style>
   article {
     cursor: pointer;
+  }
+  .form-name {
+    color: var(--pico-color);
+    display: flex;
+    gap: 16px;
   }
 </style>
