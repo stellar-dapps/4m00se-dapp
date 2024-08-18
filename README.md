@@ -128,7 +128,7 @@ npm run dev
 <div id="4m00se-widget-container"></div>
 ...
 <script>
-  WidgetSDK.initFormWidget({
+  formWidgetSDK.initFormWidget({
     <!-- see the "Form configuration" guide -->
   });
 </script>
@@ -136,7 +136,11 @@ npm run dev
 
 3. Form configuration
 
-You can configure the following parameters of a form widget... (TBD)
+You can configure the following parameters of a form widget:
+
+- `configUrl` — required, generated when a form is built
+- `container` — optional, gives the possibility to use custom container id instead of the default `4m00se-widget-container`
+- `onSubmit` — optional, gives the possibility to use custom callback on form submission (by default, dedicate Freighter transaction signing flow is triggered)
 
 ### Examples
 
