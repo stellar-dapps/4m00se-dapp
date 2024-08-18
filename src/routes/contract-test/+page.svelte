@@ -2,11 +2,12 @@
   import { onMount } from 'svelte';
   import helloWorld from '../../contracts/hello_world.ts';
   import Counter from '$lib/components/Counter.svelte';
-  import { createConfig, getFormConfigFromIpfs, listConfigs } from '$lib/utils/ipfs.ts';
+  import { createIpfsFormConfigRecord, getFormConfigFromIpfs, listConfigs } from '$lib/utils/ipfs.ts';
   import { generateRandomAssetId } from '$lib/utils/asset-id-generator.ts';
   import { authStore } from '$lib/stores/auth.store.ts';
   import CreateAsset from '$lib/components/test/CreateAsset.svelte';
   import AssetList from '$lib/components/test/AssetList.svelte';
+  import { mockStellarConfig } from '$lib/content/mocks/stellar-config.ts';
 
   let publicKey: string;
 
@@ -44,7 +45,7 @@
     <h2>IPFS testing</h2>
     <section>
       <h4>Create test</h4>
-      <button type="button" on:click={createConfig}>Create test JSON</button>
+      <button type="button" on:click={() => createIpfsFormConfigRecord(mockStellarConfig)}>Create test JSON</button>
 
       <h4>Get config</h4>
       <button type="button" class="secondary" on:click={() => getFormConfigFromIpfs()}>Get test JSON</button>

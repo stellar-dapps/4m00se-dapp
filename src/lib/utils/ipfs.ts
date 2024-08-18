@@ -1,17 +1,23 @@
 import { PinataSDK } from 'pinata';
-import { StellarConfig } from '$lib/content/mocks/stellar-config.ts';
+import { mockStellarConfig } from '$lib/content/mocks/stellar-config.ts';
+import type { PinataResponse } from '$lib/models/pinata-response.model.ts';
+import type { FormConfig } from '$lib/models/form-config.model.ts';
 
 const pinata = new PinataSDK({
   pinataJwt: import.meta.env.VITE_PINATA_JWT,
   pinataGateway: import.meta.env.VITE_GATEWAY_URL
 });
 
-export async function createConfig() {
+export async function createIpfsFormConfigRecord(config: FormConfig): Promise<PinataResponse | null> {
   try {
-    const upload = await pinata.upload.json(StellarConfig);
+    const upload = await pinata.upload.json(config).addMetadata({
+      name: config.id // add asset id for future filtering
+    });
     console.log(upload);
+    return upload;
   } catch (error) {
     console.log(error);
+    return null;
   }
 }
 

@@ -1,10 +1,7 @@
 import type { FormConfig } from '$lib/models/form-config.model.ts';
 
-export const StellarConfig: FormConfig = {
-  id: '1',
+export const mockStellarConfig: FormConfig = {
   name: 'Stellar Build Better Submission',
-  createdBy: '1',
-  createdAt: new Date(),
   fields: [
     { name: 'email', label: 'Email', type: 'email', required: true },
     { name: 'github', label: 'GitHub Username' },

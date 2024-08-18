@@ -3,7 +3,7 @@
   import { goto } from '$app/navigation';
   import { authStore } from '$lib/stores/auth.store.ts';
   import type { FormSubmissionListPageData } from '$lib/models/page-data.model.ts';
-  import { StellarConfig } from '$lib/content/mocks/stellar-config.ts';
+  import { mockStellarConfig } from '$lib/content/mocks/stellar-config.ts';
   import { initFormWidget } from '../../widget/init-form-widget.ts';
 
   export let data: FormSubmissionListPageData;

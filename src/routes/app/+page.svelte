@@ -5,6 +5,7 @@
   import EmptyState from '$lib/components/EmptyState.svelte';
   import { getFormConfigFromIpfs } from '$lib/utils/ipfs.ts';
   import { decodeBase64 } from '$lib/utils/decoder.ts';
+  import { handleFakeFormCreate } from '$lib/utils/form-create-manager.ts';
 
   let publicKey: string | null = null;
   let forms: any[] = [];
@@ -85,5 +86,7 @@
       </li>
     {/each}
   </ul>
-  <button type="button" class="secondary" on:click={() => goto('/app/form')}>+ Add form</button>
+  <button type="button" class="secondary" on:click={() => /*goto('/app/form')*/ handleFakeFormCreate(publicKey)}
+    >+ Add form</button
+  >
 {/if}

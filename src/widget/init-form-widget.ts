@@ -10,7 +10,7 @@ declare global {
 }
 
 export async function initFormWidget(options: FormWidgetOptions) {
-  const { container = '4m00se-widget-container', configUrl, onSubmit } = options;
+  const { container = '4m00se-widget-container', configUrl, onSubmit = null } = options;
   const rootElement = document.getElementById(container);
 
   const config: FormConfig | null = await getFormConfig(configUrl);
