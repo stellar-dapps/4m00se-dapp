@@ -3,6 +3,9 @@ import FreighterAPI from '@stellar/freighter-api';
 
 const { signTransaction, setAllowed, getUserInfo, isConnected } = FreighterAPI;
 
+// const baseUrl: string = 'https://localhost:5173';
+const baseUrl: string = 'https://4m.lol';
+
 async function connectWallet() {
   if (await isConnected()) {
     await setAllowed();
@@ -33,7 +36,7 @@ async function signSubmissionTransaction(assetId: string) {
 }
 
 async function buildTransaction(publicKey: string, assetId: string) {
-  const response = await fetch('https://localhost:5173/api/stellar/create-submission-transaction', {
+  const response = await fetch(`${baseUrl}/api/stellar/create-submission-transaction`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -63,7 +66,7 @@ export async function onSubmitDefault(formData: any, formConfig: FormConfig) {
 
   const tx = await signSubmissionTransaction(formConfig.name);
 
-  const response = await fetch('https://localhost:5173/api/stellar/submit-form-data', {
+  const response = await fetch(`${baseUrl}/api/stellar/submit-form-data`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
