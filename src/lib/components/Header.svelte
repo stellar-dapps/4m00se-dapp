@@ -87,7 +87,11 @@
         <ul>
           {#if !$formStore.selectedAsset}
             <li><button type="button" class="secondary" disabled={!formElements?.length}>Preview</button></li>
-            <li><button type="button" disabled={!formElements?.length}>Save</button></li>
+            <li>
+              <button type="button" disabled={!formElements?.length || !currentFormName || currentFormName === 'N/A*'}
+                >Save</button
+              >
+            </li>
           {/if}
           {#if $formStore.selectedAsset}
             <li><Submitted /></li>

@@ -7,6 +7,6 @@
   }
 </script>
 
-<div contenteditable="true" on:input={handleInput}>
+<div class={text === 'N/A*' ? 'pico-color-pink-450' : ''} contenteditable="true" on:input={handleInput}>
   {text}
 </div>

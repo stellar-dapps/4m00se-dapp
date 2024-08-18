@@ -4,7 +4,6 @@
   import type { FormField } from '$lib/models/form-config.model.ts';
   import TextInput from '$lib/components/TextInput.svelte';
   import Checkbox from '$lib/components/Checkbox.svelte';
-  import Banner from '$lib/components/Banner.svelte';
   import CodeSnippet from '$lib/components/test/CodeSnippet.svelte';
 
   const basePinataUrl = import.meta.env.VITE_GATEWAY_URL + '/ipfs/';

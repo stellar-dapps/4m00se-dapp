@@ -70,7 +70,8 @@
   async function handleFormSelection(form: StellarAccountAsset) {
     formStore.update((state) => ({
       ...state,
-      selectedAsset: form
+      selectedAsset: form,
+      formSubmissionsForSelectedAsset: []
     }));
 
     const configsFromIpfs: any[] = await listIpfsConfigs(form.asset_code);

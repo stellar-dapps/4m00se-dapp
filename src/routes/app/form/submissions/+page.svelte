@@ -7,14 +7,39 @@
   <EmptyState mainTitle="No form responses yet" mainSubTitle="You haven't received any form submissions yet." isNoCta />
 {:else}
   <h1 class="left">{$formStore.formSubmissionsForSelectedAsset.length} form responses</h1>
-  <ul class="list-unstyled">
-    {#each $formStore.formSubmissionsForSelectedAsset as submission}
-      <li>
-        <article>
-          <h6>{submission.submittedBy}</h6>
-          <div>{submission.submittedAt}</div>
-        </article>
-      </li>
-    {/each}
-  </ul>
+  <section class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Author</th>
+          {#if $formStore?.selectedAsset?.ipfsData?.fields.length}
+            {#each $formStore?.selectedAsset?.ipfsData?.fields as field}
+              <th scope="col">{field.name}</th>
+            {/each}
+          {/if}
+        </tr>
+      </thead>
+      <tbody>
+        {#each $formStore.formSubmissionsForSelectedAsset as submission}
+          <tr>
+            <th scope="row" title={submission.submittedBy}>
+              {submission.submittedBy}
+            </th>
+            {#if $formStore?.selectedAsset?.ipfsData?.fields.length}
+              {#each $formStore?.selectedAsset?.ipfsData?.fields as field}
+                <td>{submission.formData[field.name] ?? '—'}</td>
+              {/each}
+            {/if}
+          </tr>
+        {/each}
+      </tbody>
+    </table>
+  </section>
 {/if}
+
+<style>
+  .table-container {
+    width: 100%;
+    overflow-x: auto;
+  }
+</style>
