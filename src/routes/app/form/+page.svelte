@@ -1,16 +1,19 @@
 <script lang="ts">
-  import { goto } from '$app/navigation';
   import EmptyState from '$lib/components/EmptyState.svelte';
 
   const elements: any[] = [];
   const options: any[] = [
     {
-      title: 'Text',
+      title: 'Base text field',
       id: '1'
     },
     {
-      title: 'Checkbox',
+      title: 'Email address',
       id: '2'
+    },
+    {
+      title: 'Yes/No option',
+      id: '3'
     }
   ];
 

@@ -3,7 +3,7 @@
 
   export let mainTitle = 'No forms yet';
   export let mainSubTitle = `You haven't created any forms yet. Click the button below to get started.`;
-  export let ctaTitle = 'Create form';
+  export let ctaTitle = '+ Add form';
   export let ctaOptions: any[] = [];
   export let isNoCta = false;
   export let onCtaTrigger = (_) => {};

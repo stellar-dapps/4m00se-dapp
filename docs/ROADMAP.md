@@ -2,6 +2,7 @@
 
 ## Product
 
+- [ ] Dogfood by collecting dapp feedback with a pop-up widget
 - [ ] Hosted forms ([Fleek](https://fleek.co/) possibly)
 - [ ] Using for blog-like website comments
 - [ ] Embeddings tracking — info for customers where their form is used and how
@@ -11,7 +12,6 @@
 - [ ] Personas and main user stories for testing and implementation (admin / customer / user)
 - [ ] Play around blockchain data immutability (metadata as flags specifically)
 - [ ] More meaningful template list
-- [ ] Dogfood by collecting dapp feedback with a pop-up widget
 
 ## UI
 
@@ -47,6 +47,7 @@
 ## Security
 
 - [ ] Additional content encryption
+- [ ] Proper form sanitizing everywhere
 
 ## Widget
 
@@ -64,6 +65,7 @@
 
 - [ ] GitHub actions for pre-PR and build checks
 - [ ] Set up a11y testing pipeline
+- [ ] Consider git flow and staging env
 
 ## Bundling and deployment
 
