@@ -108,7 +108,7 @@
       </li>
     {/each}
   </ul>
-  <button type="button" class="secondary" on:click={() => goto('/app/form')}>+ Add form</button>
+  <button type="button" on:click={() => goto('/app/form')}>+ Add form</button>
 {/if}
 
 <style>

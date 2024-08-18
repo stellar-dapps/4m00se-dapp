@@ -38,6 +38,7 @@
 ## JSON IPFS storage
 
 - [ ] Optimize Pinata / consider alternatives
+- [ ] Consider creating IPFS node and custom SDK for it
 
 ## AuthN / AuthZ
 
@@ -76,7 +77,7 @@
 
 ## Development and tech debt
 
-- [ ] **_Mainnet adjustments_**
+- [ ] Mainnet adjustments
 - [ ] Thorough error processing
 - [ ] Consider proper monitoring and error tracking
 - [ ] Proper TypeScript types everywhere
@@ -89,6 +90,7 @@
 - [ ] Integrate headless components
 - [ ] Proper parametrized routing
 - [ ] Check asset name uniqueness on creation
+- [ ] API docs autogeneration
 
 ## Documentation
 

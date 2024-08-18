@@ -9,4 +9,4 @@
   <title>4m00se — Docs</title>
 </svelte:head>
 
-{@html md.render(my_markdown)}
+<section>{@html md.render(my_markdown)}</section>

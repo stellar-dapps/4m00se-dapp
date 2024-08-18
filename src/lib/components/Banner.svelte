@@ -20,11 +20,7 @@
       class={isWarning ? 'pico-background-pink-50 disclaimer' : 'pico-background-azure-50 disclaimer'}
       role="alert"
     >
-      <span>⚠️</span>
       <span class="banner-content">{@html bannerText}</span>
-      <span>
-        <button class="close-button" on:click={closeBanner}>❌</button>
-      </span>
     </article>
   </div>
 {/if}
@@ -38,20 +34,5 @@
 
   .banner-content {
     flex: 1;
-  }
-
-  .close-button {
-    background: none;
-    border: none;
-    color: inherit;
-    font: inherit;
-    line-height: normal;
-    margin: 0;
-    padding: 0;
-    cursor: pointer;
-  }
-
-  .close-button:focus {
-    outline: none;
   }
 </style>

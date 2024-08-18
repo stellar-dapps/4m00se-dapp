@@ -35,25 +35,12 @@
   }
 </script>
 
-{#if $page.url.pathname.includes('/app')}
-  <li>
-    <input type="search" name="search" placeholder="Search" aria-label="Search" />
-  </li>
-{/if}
+<!--{#if $page.url.pathname.includes('/app')}-->
+<!--  <li>-->
+<!--    <input type="search" name="search" placeholder="Search" aria-label="Search" />-->
+<!--  </li>-->
+<!--{/if}-->
 
-{#if isAuthenticated && !$page.url.pathname.includes('/app')}
-  <li><a href="/dashboard" class="secondary" class:contrast={$page.url.pathname === '/dashboard'}>Dashboard</a></li>
-  <li>
-    <a href="/form-builder" class="secondary" class:contrast={$page.url.pathname === '/form-builder'}>Form Builder</a>
-  </li>
-  <li>
-    <a href="/form-reader" class="secondary" class:contrast={$page.url.pathname === '/form-reader'}>Form Analyzer</a>
-  </li>
-  <!-- TODO get rid of it after testing -->
-  <li>
-    <a href="/contract-test" class="secondary" class:contrast={$page.url.pathname === '/contract-test'}>TEMP</a>
-  </li>
-{/if}
 <li>
   <a href="/docs" class="secondary" class:contrast={$page.url.pathname === '/docs'}
     >{$page.url.pathname.includes('/app') ? 'Documentation' : 'Get Started'}</a
@@ -61,17 +48,17 @@
 </li>
 
 {#if !$page.url.pathname.includes('/app')}
-  <li><a href="https://github.com/stellar-dapps/4m00se-dapp" class="secondary" target="_blank">GitHub ↗️</a></li>
+  <li><a href="https://github.com/stellar-dapps/4m00se-dapp" class="secondary" target="_blank">GitHub</a></li>
   <li>
     <a href="/demo/Stellar _ Build Better on Stellar_ Smart Contract Challenge.html" class="secondary" target="_blank"
-      >Demo ↗️</a
+      >Examples</a
     >
   </li>
 {/if}
 
 {#if !isMobile}
   {#if isAuthenticated && !$page.url.pathname.includes('/app')}
-    <li><button type="button" on:click={goToApp}>4m00se app</button></li>
+    <li><button type="button" on:click={goToApp} class="auth-button">4m00se app</button></li>
   {:else}
     <li><AuthButton /></li>
   {/if}

@@ -84,7 +84,7 @@
 
 <button
   aria-busy={isWalledActionInProgress}
-  class="secondary"
+  class="secondary auth-button"
   on:click={handleSignIn}
   disabled={isButtonDisabled || isWalledActionInProgress}
   title={buttonText}
@@ -94,7 +94,6 @@
 
 <style>
   button {
-    max-width: 15vw;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

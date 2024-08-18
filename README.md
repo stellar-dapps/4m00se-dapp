@@ -1,4 +1,4 @@
-# 4m00se-dapp
+# 4m00se — form management platform
 
 4m00se is a decentralized application (dApp) built on the Stellar network. It consists of a form builder and form submission reader functionality, tied together via embeddable form widgets. The application is server-rendered and decentralized, utilizing the Stellar network and Soroban for blockchain transaction management and IPFS for form configuration storage and submission collecting.
 

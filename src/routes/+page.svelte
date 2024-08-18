@@ -54,7 +54,7 @@
 </section>
 
 <section class="cta">
-  <a href="/docs" role="button" class="secondary">Build now</a>
+  <a href="/docs" role="button">Build now</a>
 </section>
 
 <style>

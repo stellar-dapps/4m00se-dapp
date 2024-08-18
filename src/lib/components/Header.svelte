@@ -7,6 +7,7 @@
   import { goto } from '$app/navigation';
   import EditableText from '$lib/components/EditableText.svelte';
   import { formStore } from '$lib/stores/form.store.ts';
+  import Logo from '$lib/components/img/Logo.svelte';
 
   let isWideScreen = true;
 
@@ -23,7 +24,7 @@
 
   onMount(() => {
     if (typeof window !== 'undefined') {
-      isWideScreen = window.matchMedia('(min-width: 1280px)').matches;
+      isWideScreen = window.matchMedia('(min-width: 768px)').matches;
       window.addEventListener('resize', handleResize);
     }
   });
@@ -38,7 +39,7 @@
 
   function handleResize() {
     if (typeof window !== 'undefined') {
-      isWideScreen = window.matchMedia('(min-width: 1280px)').matches;
+      isWideScreen = window.matchMedia('(min-width: 768px)').matches;
     }
   }
 
@@ -93,7 +94,7 @@
   {:else}
     <nav>
       <ul>
-        <li><a href="/" class="contrast"><strong>🫎 4m00se</strong></a></li>
+        <li><a href="/" class="contrast"><Logo /></a></li>
       </ul>
       <ul>
         {#if isWideScreen || $page.url.pathname.includes('/app')}
