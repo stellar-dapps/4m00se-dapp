@@ -12,7 +12,7 @@ export async function createIpfsFormConfigRecord(config: FormConfig): Promise<Pi
     const upload = await pinata.upload.json(config).addMetadata({
       name: config.id // add asset id for future filtering
     });
-    console.log(upload);
+
     return upload;
   } catch (error) {
     console.log(error);
@@ -23,7 +23,7 @@ export async function createIpfsFormConfigRecord(config: FormConfig): Promise<Pi
 export async function listConfigs(cid: string) {
   try {
     const file = await pinata.listFiles().cid(cid);
-    console.log(file);
+
     return file;
   } catch (error) {
     console.log(error);
@@ -47,7 +47,7 @@ export async function updateMetadata(cid: string, name: string, submissions: str
   return update;
 }
 
-export async function getFormConfigFromIpfs(id?: string) {
+export async function getFormConfigFromIpfs(id?: string): Promise<FormConfig | null> {
   let jsonCid = id;
   if (!jsonCid) {
     // TODO return actually
@@ -59,9 +59,9 @@ export async function getFormConfigFromIpfs(id?: string) {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.log(error);
+    return null;
   }
 }

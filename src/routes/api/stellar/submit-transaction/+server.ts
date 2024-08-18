@@ -9,11 +9,10 @@ export const POST: RequestHandler = async ({ request }) => {
   const { xdr } = await request.json();
 
   try {
-    console.log({ networkPassphrase });
     const transaction = StellarSdk.TransactionBuilder.fromXDR(xdr, networkPassphrase);
     const response = await server.submitTransaction(transaction, { skipMemoRequiredCheck: true });
     const result = new Response(JSON.stringify(response));
-    console.log({ result });
+
     return result;
   } catch (error: any) {
     console.error('ERROR', error);

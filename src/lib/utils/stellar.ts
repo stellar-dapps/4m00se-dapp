@@ -10,7 +10,7 @@ const server = new StellarSdk.Horizon.Server(stellarUrl);
 export async function getIssuedAssets(issuerPublicKey: string) {
   try {
     const assets = await server.assets().forIssuer(issuerPublicKey).call();
-    console.log(assets.records);
+
     return assets.records;
   } catch (error: any) {
     throw new Error(error.message);
@@ -20,7 +20,7 @@ export async function getIssuedAssets(issuerPublicKey: string) {
 export async function getAccountData(publicKey: string) {
   try {
     const account = await server.loadAccount(publicKey);
-    console.log(account.data_attr);
+
     return account.data_attr;
   } catch (error: any) {
     throw new Error(error.message);

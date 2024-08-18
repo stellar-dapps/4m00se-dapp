@@ -10,8 +10,6 @@ export const POST: RequestHandler = async ({ request }) => {
   try {
     const account = await server.loadAccount(publicKey);
 
-    console.log({ account });
-
     const transaction = new StellarSdk.TransactionBuilder(account, {
       fee: StellarSdk.BASE_FEE,
       networkPassphrase: StellarSdk.Networks.TESTNET
@@ -20,7 +18,6 @@ export const POST: RequestHandler = async ({ request }) => {
       .setTimeout(30)
       .build();
 
-    console.log({ transaction });
     return new Response(JSON.stringify({ xdr: transaction.toXDR() }), { status: 200 });
   } catch (error: any) {
     return new Response(JSON.stringify({ error: error.message }), { status: 500 });

@@ -13,13 +13,12 @@ const networkPassphrase = StellarSdk.Networks.TESTNET;
 export const POST: RequestHandler = async ({ request, fetch }) => {
   const { formData, assetCode, assetIssuer, tx } = await request.json();
 
-  console.log({ tx });
   // 1. Get assets for issuer key
-  const issuerAssets: StellarAccountAsset[] = await (
-    await fetch(`/api/stellar/get-account-assets?issuerPublicKey=${assetIssuer}`)
-  ).json();
+  // const issuerAssets: StellarAccountAsset[] = await (
+  //   await fetch(`/api/stellar/get-account-assets?issuerPublicKey=${assetIssuer}`)
+  // ).json();
   // 2. Filter assets by asset code
-  const formAsset = issuerAssets.find((asset: StellarAccountAsset) => asset.asset_code === assetCode);
+  // const formAsset = issuerAssets.find((asset: StellarAccountAsset) => asset.asset_code === assetCode);
   // 3. List IPFS files
   const configsFromIpfs: any[] = await listIpfsConfigs(assetCode);
   // 4. Filter files by Pinata's metadata.name (=== assetCode)

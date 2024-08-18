@@ -6,6 +6,7 @@
   import { mockFormConfigs } from '$lib/content/mocks/mock-configuration-list.ts';
   import { goto } from '$app/navigation';
   import EditableText from '$lib/components/EditableText.svelte';
+  import { formStore } from '$lib/stores/form.store.ts';
 
   let isWideScreen = true;
 
@@ -14,6 +15,11 @@
   let currentFormDescription = `<no description>`;
   const formElements: any[] = [];
   const isNewForm = false;
+
+  formStore.subscribe((value) => {
+    currentFormName = value.selectedAsset?.asset_code ?? 'N/A';
+    currentFormDescription = value.selectedAsset?.ipfsData?.name ?? 'N/A';
+  });
 
   onMount(() => {
     if (typeof window !== 'undefined') {

@@ -6,16 +6,22 @@
   import { getFormConfigFromIpfs } from '$lib/utils/ipfs.ts';
   import { decodeBase64 } from '$lib/utils/decoder.ts';
   import { handleFakeFormCreate } from '$lib/utils/form-create-manager.ts';
+  import { formStore } from '$lib/stores/form.store.ts';
+  import type { StellarAccountAsset } from '$lib/models/stellar-account-asset.model.ts';
+  import type { FormConfig } from '$lib/models/form-config.model.ts';
 
   let publicKey: string | null = null;
-  let forms: any[] = [];
+  let forms: StellarAccountAsset[] = [];
 
   async function getUserAssets(publicKey: string) {
     return await (await fetch(`/api/stellar/get-account-assets?issuerPublicKey=${publicKey}`)).json();
   }
 
   function getFormAssets(assets: any[], prefix = '4m00se') {
-    return assets?.filter((asset) => asset?.asset_code?.includes(prefix));
+    if (!assets || !Array.isArray(assets)) {
+      return;
+    }
+    return assets.filter((asset) => asset?.asset_code?.includes(prefix));
   }
 
   async function getAccountData(publicKey: string) {
@@ -29,14 +35,14 @@
     }
   }
 
-  async function getFormAssetsWithConfigs(userAccountData: any, assets: any[]) {
-    const assetPromises = assets.map(async (bareAsset) => {
+  async function getFormAssetsWithConfigs(userAccountData: any, assets: any[]): Promise<StellarAccountAsset[]> {
+    const assetPromises = assets.map(async (bareAsset: StellarAccountAsset) => {
       let asset = bareAsset;
       const cidKey = `cid_${asset.asset_code}`;
       const cid = userAccountData[cidKey];
       const decodedCid = decodeBase64(cid);
       if (decodedCid) {
-        const ipfsData = await getFormConfigFromIpfs(decodedCid);
+        const ipfsData: FormConfig | null = await getFormConfigFromIpfs(decodedCid);
         asset.ipfsData = ipfsData;
       }
       return asset;
@@ -48,8 +54,24 @@
   async function loadForms(publicKey: string) {
     const userAssets = await getUserAssets(publicKey);
     const formAssets = getFormAssets(userAssets);
+    if (!formAssets) {
+      return;
+    }
     const userAccount = await getAccountData(publicKey);
     forms = await getFormAssetsWithConfigs(userAccount, formAssets);
+    formStore.update((state) => ({
+      ...state,
+      formAssets: forms
+    }));
+  }
+
+  function handleFormSelection(form: StellarAccountAsset) {
+    formStore.update((state) => ({
+      ...state,
+      selectedAsset: form
+    }));
+
+    goto('/app/form');
   }
 
   onMount(() => {
@@ -72,21 +94,25 @@
   <title>4m00se — Dashboard</title>
 </svelte:head>
 
-{#if !forms?.length}
+{#if !$formStore.formAssets?.length}
   <EmptyState onCtaTrigger={() => goto('/app/form')} />
 {:else}
-  <h1>You have {forms.length} forms</h1>
+  <h1>You have {$formStore.formAssets.length} forms</h1>
   <ul class="list-unstyled">
-    {#each forms as form}
+    {#each $formStore.formAssets as form}
       <li>
-        <article>
+        <article on:click={() => handleFormSelection(form)}>
           <h6>{form?.asset_code}</h6>
           <div>{form?.ipfsData?.name}</div>
         </article>
       </li>
     {/each}
   </ul>
-  <button type="button" class="secondary" on:click={() => /*goto('/app/form')*/ handleFakeFormCreate(publicKey)}
-    >+ Add form</button
-  >
+  <button type="button" class="secondary" on:click={() => goto('/app/form')}>+ Add form</button>
 {/if}
+
+<style>
+  article {
+    cursor: pointer;
+  }
+</style>

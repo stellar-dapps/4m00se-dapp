@@ -8,44 +8,16 @@ const networkPassphrase = StellarSdk.Networks.TESTNET;
 export const POST: RequestHandler = async ({ request }) => {
   const { accountPublicKey, assetCode, cid, amount } = await request.json();
 
-  // FIXME testnet only, for now, — need to take care of that
   const issuerKeypair = StellarSdk.Keypair.random();
   const issuerPublicKey = issuerKeypair.publicKey();
-  console.log({ issuerPublicKey });
 
   const formAsset = new StellarSdk.Asset(assetCode, issuerPublicKey);
 
-  console.log('Fundbotting');
   // Fund the issuer account using the friendbot
   const friendbotUrl = `https://friendbot.stellar.org?addr=${encodeURIComponent(issuerPublicKey)}`;
   const friendbotResult = await fetch(friendbotUrl);
 
-  console.log('friendbot result ', friendbotResult);
-
-  console.log('fetching account...');
-
-  // const delay = 3000;
-  // const retries = 12;
-  // for (let i = 0; i < retries; i++) {
-  //   try {
-  //     const account = await server.loadAccount(issuerPublicKey);
-  //     console.log(`Account ${issuerPublicKey} is now available.`, { account });
-  //     return;
-  //   } catch (error) {
-  //     if (i < retries - 1) {
-  //       console.log(`Account ${issuerPublicKey} not found. Retrying in ${delay / 1000} seconds...`);
-  //       await new Promise(resolve => setTimeout(resolve, delay));
-  //     } else {
-  //       throw new Error(`Account ${issuerPublicKey} not found after ${retries} retries.`);
-  //     }
-  //   }
-  // }
-
-  console.log('loading account');
-
   const issuerAccount = await server.loadAccount(issuerPublicKey); // TODO error processing
-
-  console.log('building transaction...');
 
   const issuanceTransaction = new StellarSdk.TransactionBuilder(issuerAccount, {
     fee: StellarSdk.BASE_FEE,
@@ -60,8 +32,6 @@ export const POST: RequestHandler = async ({ request }) => {
     )
     .setTimeout(30)
     .build();
-
-  console.log('issuing...');
 
   issuanceTransaction.sign(issuerKeypair);
 
@@ -78,7 +48,6 @@ export const POST: RequestHandler = async ({ request }) => {
       .addOperation(
         StellarSdk.Operation.changeTrust({
           asset: formAsset
-          // limit: amount.toString()
         })
       )
       .addOperation(

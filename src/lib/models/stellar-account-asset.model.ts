@@ -1,4 +1,6 @@
 // Manually extracted interface (I need only the last two)
+import type { FormConfig } from '$lib/models/form-config.model.ts';
+
 export interface StellarAccountAsset {
   balance?: string;
   limit?: string;
@@ -10,4 +12,5 @@ export interface StellarAccountAsset {
   asset_type?: string;
   asset_code: string;
   asset_issuer: string;
+  ipfsData?: FormConfig | null; // augmented on UI
 }
