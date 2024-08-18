@@ -1,25 +1,34 @@
+import type { FormConfig } from '$lib/models/form-config.model.ts';
+import type { FormWidgetOptions } from '$lib/models/form-widget-options.ts';
 import FormWidget from './FormWidget.svelte';
+import { getFormConfig } from './form-widget.service.ts';
 
 declare global {
   interface Window {
-    WidgetSDK: any;
+    formWidgetSDK: any;
   }
 }
 
-export function initFormWidget(options) {
-  const { container, config, onSubmit } = options;
+export async function initFormWidget(options: FormWidgetOptions) {
+  const { container = '4m00se-widget-container', configUrl, onSubmit } = options;
   const rootElement = document.getElementById(container);
 
-  if (rootElement) {
-    new FormWidget({
-      target: rootElement,
-      props: { config, onSubmit }
-    });
+  const config: FormConfig | null = await getFormConfig(configUrl);
+
+  if (config) {
+    if (rootElement) {
+      new FormWidget({
+        target: rootElement,
+        props: { config, onSubmit }
+      });
+    } else {
+      console.error(`Container with id "${container}" not found.`);
+    }
   } else {
-    console.error(`Container with id "${container}" not found.`);
+    console.error(`Error fetching the form config from "${configUrl}".`);
   }
 }
 
 if (typeof window != 'undefined') {
-  window.WidgetSDK = { initFormWidget };
+  window.formWidgetSDK = { initFormWidget };
 }

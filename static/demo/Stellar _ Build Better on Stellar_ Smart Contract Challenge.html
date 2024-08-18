@@ -10832,7 +10832,7 @@
     </script>
 
     <!-- 4m00se bundle import -->
-    <script src="https://4m.lol/widget/4m00s.js"></script>
+    <script src="../widget/4m00s.js"></script>
 
     <meta name="savepage-url" content="https://stellar.org/community/build-better-challenge" />
     <meta name="savepage-title" content="Stellar | Build Better on Stellar: Smart Contract Challenge" />
@@ -11267,27 +11267,9 @@
                         </div>-->
                             <div id="4m00se-widget-container"></div>
                             <script>
-                              WidgetSDK.initFormWidget({
-                                container: '4m00se-widget-container',
-                                config: {
-                                  fields: [
-                                    { name: 'email', label: 'Email', type: 'email', required: true },
-                                    { name: 'github', label: 'GitHub Username' },
-                                    { name: 'repo', label: 'Repo Link (Optional)' },
-                                    {
-                                      name: 'post',
-                                      label: 'Dev.to Submission Post',
-                                      required: true,
-                                      placeholder: 'Link to your project hosted on dev.to'
-                                    }
-                                  ],
-                                  submitUrl: '#',
-                                  consent:
-                                    'By providing the contact information required in this form, you agree to be contacted by the Stellar Development Foundation (SDF) in order for us to inform you about our products and services. For more information on our privacy practices or how to unsubscribe, please refer to our [Privacy Policy](https://stellar.org/privacy-policy).',
-                                  styles: {
-                                    isRounded: true
-                                  }
-                                },
+                              formWidgetSDK.initFormWidget({
+                                configUrl:
+                                  'https://coffee-deliberate-beetle-660.mypinata.cloud/ipfs/bafkreicv32orr7mardh6mioh2r5nls74lgu3gcle3pm7tnvbqpj76rxkne',
                                 onSubmit: (data) => {
                                   console.log('Form submitted:', data);
                                   alert('Form submitted successfully!');

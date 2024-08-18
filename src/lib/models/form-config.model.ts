@@ -11,8 +11,8 @@ interface FormStyles {
 }
 
 export interface FormConfig {
-  id: string;
-  createdBy: string;
+  id: string; // asset name
+  createdBy: string; // public key
   createdAt: Date;
   name: string;
   fields: FormField[];

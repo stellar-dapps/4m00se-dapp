@@ -8,15 +8,18 @@ import autoprefixer from 'autoprefixer';
 import gzipPlugin from 'rollup-plugin-gzip';
 import filesize from 'rollup-plugin-filesize';
 import strip from '@rollup/plugin-strip';
+import commonjs from '@rollup/plugin-commonjs';
 
 export default {
   input: 'src/widget/init-form-widget.ts',
   output: {
     format: 'iife',
     file: 'dist/widget/4m00s.js',
-    sourcemap: false
+    sourcemap: false,
+    inlineDynamicImports: true
   },
   plugins: [
+    commonjs(),
     typescript({
       sourceMap: false,
       inlineSources: false

@@ -79,6 +79,7 @@
 - [ ] **_Mainnet adjustments_**
 - [ ] Thorough error processing
 - [ ] Consider proper monitoring and error tracking
+- [ ] Proper TypeScript types everywhere
 - [ ] Add unit tests for major business logic
 - [ ] Build component library with StoryBook for isolated development and testing the most important components
 - [ ] Add e2e/component tests for specific features / components
@@ -87,6 +88,7 @@
 - [ ] Migrate to Svelte 5
 - [ ] Integrate headless components
 - [ ] Proper parametrized routing
+- [ ] Check asset name uniqueness on creation
 
 ## Documentation
 

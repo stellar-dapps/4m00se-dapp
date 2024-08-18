@@ -13,6 +13,7 @@
     formData[event.target.name] = event.target.value;
   }
 
+  // TODO: storing form submission at IPFS pin meta
   async function handleSubmit(event) {
     event.preventDefault();
     try {
