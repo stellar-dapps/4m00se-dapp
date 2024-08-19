@@ -18,18 +18,7 @@
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      const response = await fetch(config.submitUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      });
-      if (response.ok) {
-        onSubmit ? onSubmit(formData) : (isSubmittedSuccessfully = (await onSubmitDefault(formData, config))?.success);
-      } else {
-        console.error('Error submitting form:', await response.text());
-      }
+      onSubmit ? onSubmit(formData) : (isSubmittedSuccessfully = (await onSubmitDefault(formData, config))?.success);
     } catch (error) {
       console.error('Error submitting form:', error);
     }

@@ -3,7 +3,7 @@ export interface FormField {
   label: string;
   type?: string; // default = 'text'
   required?: boolean; // default = false
-  placeholder?: string; // default = ''
+  placeholder?: string | null; // default = null
 }
 
 interface FormStyles {
@@ -16,7 +16,7 @@ export interface FormConfig {
   createdAt?: Date;
   name: string;
   fields: FormField[];
-  submitUrl: string;
+  submitUrl?: string;
   submitButtonTitle?: string; // default = 'Submit'
   consent?: string; // default = '', markdown allowed
   styles?: FormStyles;

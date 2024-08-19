@@ -1,14 +1,19 @@
 <script lang="ts">
   import EmptyState from '$lib/components/EmptyState.svelte';
   import { formStore } from '$lib/stores/form.store.ts';
-  import type { FormField } from '$lib/models/form-config.model.ts';
+  import type { FormConfig, FormField } from '$lib/models/form-config.model.ts';
   import TextInput from '$lib/components/TextInput.svelte';
   import Checkbox from '$lib/components/Checkbox.svelte';
   import CodeSnippet from '$lib/components/test/CodeSnippet.svelte';
+  import FormElementCard from '$lib/components/FormElementCard.svelte';
+  import { formElementSelectOptions } from '$lib/content/settings/form-element-select.config.ts';
+  import Dropdown from '$lib/components/Dropdown.svelte';
+  import type { FormElementOption } from '$lib/models/form-element-option.model.ts';
 
   const basePinataUrl = import.meta.env.VITE_GATEWAY_URL + '/ipfs/';
   let elements: FormField[];
   let codeContent = '';
+  const ctaTitle = '+ Add element';
 
   formStore.subscribe((value) => {
     if (value.selectedAsset) {
@@ -28,23 +33,31 @@
     `;
   });
 
-  const options: any[] = [
-    {
-      title: 'Base text field',
-      id: '1'
-    },
-    {
-      title: 'Email address',
-      id: '2'
-    },
-    {
-      title: 'Yes/No option',
-      id: '3'
-    }
-  ];
+  function handleElementAdd(option: FormElementOption) {
+    console.log({ option });
+    const newFormField: FormField = {
+      name: 'N/A*',
+      label: 'N/A*',
+      type: option.type,
+      required: false,
+      placeholder: null
+    };
 
-  function handleElementAdd(option) {
-    console.log('requested ', option.title);
+    formStore.update((state) => {
+      const config: FormConfig | null = state.inProgressFormConfig;
+      if (!config) {
+        return state;
+      }
+      const fields = config?.fields || [];
+      fields.push(newFormField);
+      return {
+        ...state,
+        inProgressFormConfig: {
+          ...config,
+          fields
+        }
+      };
+    });
   }
 </script>
 
@@ -52,41 +65,51 @@
   <title>4m00se — New form</title>
 </svelte:head>
 
-{#if !elements?.length}
+{#if !elements?.length && !$formStore.inProgressFormConfig?.fields.length}
   <EmptyState
     mainTitle="No form elements yet"
     mainSubTitle="You haven't added any form elements yet. Click the button below to get started."
-    ctaTitle="+ Add element"
-    ctaOptions={options}
+    {ctaTitle}
+    ctaOptions={formElementSelectOptions}
     onDropdownCtaTrigger={handleElementAdd}
   />
 {:else}
-  {#if codeContent}
+  {#if codeContent && !$formStore.inProgressFormConfig}
     <section>
       <CodeSnippet {codeContent} />
     </section>
   {/if}
+
   <section>
-    {#each elements as field, index}
-      <article>
-        {#if field.type === 'text' || field.type === 'email' || !field.type}
-          <TextInput
-            disabled={!!$formStore.selectedAsset}
-            required={field.required}
-            label={field.label}
-            placeholder={field.placeholder || null}
-            name={field.name}
-          />
-        {/if}
+    {#if $formStore.selectedAsset}
+      {#each elements as field, index}
+        <article>
+          {#if field.type === 'text' || field.type === 'email' || !field.type}
+            <TextInput
+              disabled={!!$formStore.selectedAsset}
+              required={field.required}
+              label={field.label}
+              placeholder={field.placeholder || null}
+              name={field.name}
+            />
+          {/if}
 
-        {#if field.type === 'checkbox'}
-          <Checkbox label={field.label} />
-        {/if}
+          {#if field.type === 'checkbox'}
+            <Checkbox label={field.label} />
+          {/if}
+        </article>
+      {/each}
+    {:else}
+      <!-- Form builder -->
+      {#if $formStore.inProgressFormConfig}
+        <section>
+          {#each $formStore.inProgressFormConfig?.fields as field, index}
+            <FormElementCard {field} />
+          {/each}
+        </section>
 
-        {#if !$formStore.selectedAsset}
-          <button class="secondary" type="button" on:click={() => {}}>Remove</button>
-        {/if}
-      </article>
-    {/each}
+        <Dropdown title={ctaTitle} options={formElementSelectOptions} onSelect={(option) => handleElementAdd(option)} />
+      {/if}
+    {/if}
   </section>
 {/if}

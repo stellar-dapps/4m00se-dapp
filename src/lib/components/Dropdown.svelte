@@ -5,7 +5,7 @@
 </script>
 
 <details class="dropdown">
-  <summary role="button" class="secondary">
+  <summary role="button">
     {title}
   </summary>
   <ul>

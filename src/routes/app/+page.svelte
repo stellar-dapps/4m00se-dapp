@@ -113,7 +113,8 @@
     formStore.update((state) => ({
       ...state,
       selectedAsset: null,
-      formSubmissionsForSelectedAsset: []
+      formSubmissionsForSelectedAsset: [],
+      inProgressFormConfig: { name: 'N/A*', fields: [] }
     }));
     goto('/app/form');
   }
