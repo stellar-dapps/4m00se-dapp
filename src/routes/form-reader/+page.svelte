@@ -19,15 +19,6 @@
     if (!isAuthenticated) {
       goto('/');
     }
-
-    // initFormWidget({
-    //   container: 'form-widget-container',
-    //   config: StellarConfig,
-    //   onSubmit: (data) => {
-    //     console.log('Form submitted:', data);
-    //     alert('Form submitted successfully!');
-    //   }
-    // });
   });
 </script>
 

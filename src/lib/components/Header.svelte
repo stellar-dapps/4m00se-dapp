@@ -10,6 +10,8 @@
   import Logo from '$lib/components/img/Logo.svelte';
   import Back from '$lib/components/img/Back.svelte';
   import Submitted from '$lib/components/Submitted.svelte';
+  import { handleFormCreate } from '$lib/utils/form-create-manager.ts';
+  import { authStore } from '$lib/stores/auth.store.js';
 
   let isWideScreen = true;
 
@@ -32,11 +34,27 @@
   });
 
   function updateCurrentFormName(newName: string) {
-    currentFormName = newName;
+    formStore.update((state) => ({
+      ...state,
+      inProgressFormConfig: {
+        ...state.inProgressFormConfig,
+        name: newName
+      }
+    }));
   }
 
   function updateCurrentFormDescription(newDescription: string) {
-    currentFormDescription = newDescription;
+    formStore.update((state) => ({
+      ...state,
+      inProgressFormConfig: {
+        ...state.inProgressFormConfig,
+        description: newDescription
+      }
+    }));
+  }
+
+  async function saveForm() {
+    const created = await handleFormCreate($authStore.user, $formStore.inProgressFormConfig);
   }
 
   function handleResize() {
@@ -67,16 +85,19 @@
     <nav class="context">
       <ul>
         <li>
-          <h1>
+          <h1 class="left">
             {#if !$formStore.selectedAsset}
-              <EditableText text={currentFormName} onEdited={updateCurrentFormName} />
+              <EditableText text={$formStore.inProgressFormConfig?.name} onEdited={updateCurrentFormName} />
             {:else}
               {currentFormName}
             {/if}
           </h1>
           <div>
             {#if !$formStore.selectedAsset}
-              <EditableText text={currentFormDescription} onEdited={updateCurrentFormDescription} />
+              <EditableText
+                text={$formStore.inProgressFormConfig?.description || 'No description'}
+                onEdited={updateCurrentFormDescription}
+              />
             {:else}
               {currentFormDescription}
             {/if}
@@ -86,10 +107,18 @@
       {#if !$page.url.pathname.includes('/app/form/submissions')}
         <ul>
           {#if !$formStore.selectedAsset}
-            <li><button type="button" class="secondary" disabled={!formElements?.length}>Preview</button></li>
             <li>
-              <button type="button" disabled={!formElements?.length || !currentFormName || currentFormName === 'N/A*'}
-                >Save</button
+              <button type="button" class="secondary" disabled={!$formStore.inProgressFormConfig?.fields?.length}
+                >Preview</button
+              >
+            </li>
+            <li>
+              <button
+                type="button"
+                disabled={!$formStore.inProgressFormConfig?.fields?.length ||
+                  !$formStore.inProgressFormConfig?.name ||
+                  $formStore.inProgressFormConfig?.name === 'N/A*'}
+                on:click={saveForm}>Save</button
               >
             </li>
           {/if}

@@ -34,7 +34,6 @@
   });
 
   function handleElementAdd(option: FormElementOption) {
-    console.log({ option });
     const newFormField: FormField = {
       name: 'N/A*',
       label: 'N/A*',
@@ -59,13 +58,34 @@
       };
     });
   }
+
+  function handleFormFieldChange(formFieldUpdates: FormField, index: number) {
+    if (!formFieldUpdates) {
+      return;
+    }
+    formStore.update((state) => {
+      const config = state.inProgressFormConfig;
+      const fields = config?.fields!;
+      const selectedFormField = fields[index];
+      let { name, label, required, placeholder, checked } = formFieldUpdates;
+      const updatedFormField: FormField = { ...selectedFormField, name: name, label, required, placeholder, checked };
+      fields[index] = updatedFormField;
+      return {
+        ...state,
+        inProgressFormConfig: {
+          ...config,
+          fields
+        }
+      };
+    });
+  }
 </script>
 
 <svelte:head>
   <title>4m00se — New form</title>
 </svelte:head>
 
-{#if !elements?.length && !$formStore.inProgressFormConfig?.fields.length}
+{#if !elements?.length && !$formStore.inProgressFormConfig?.fields?.length}
   <EmptyState
     mainTitle="No form elements yet"
     mainSubTitle="You haven't added any form elements yet. Click the button below to get started."
@@ -103,9 +123,11 @@
       <!-- Form builder -->
       {#if $formStore.inProgressFormConfig}
         <section>
-          {#each $formStore.inProgressFormConfig?.fields as field, index}
-            <FormElementCard formField={field} />
-          {/each}
+          {#if $formStore.inProgressFormConfig?.fields}
+            {#each $formStore.inProgressFormConfig?.fields as field, index}
+              <FormElementCard formField={field} onFieldChange={(event) => handleFormFieldChange(event, index)} />
+            {/each}
+          {/if}
         </section>
 
         <Dropdown title={ctaTitle} options={formElementSelectOptions} onSelect={(option) => handleElementAdd(option)} />

@@ -17,11 +17,8 @@
   let assetCode = generateRandomAssetId();
 
   async function handleCreateAsset() {
-    // TODO fetch it properly eventually
     const cid = 'bafkreicv32orr7mardh6mioh2r5nls74lgu3gcle3pm7tnvbqpj76rxkne';
 
-    console.log({ cid });
-    // Step 1: Create the transaction on the server side
     const response = await fetch('/api/stellar/create-transaction', {
       method: 'POST',
       headers: {
@@ -38,7 +35,6 @@
     if (response.ok) {
       const { xdr } = await response.json();
 
-      // Step 2: Sign the transaction with the Freighter wallet
       const signedTransaction = await signTransaction(xdr, { accountToSign: publicKey, network, networkPassphrase });
 
       // Step 3: Submit the signed transaction back to the server
@@ -50,11 +46,8 @@
         body: JSON.stringify({ xdr: signedTransaction })
       });
 
-      console.log({ submitResponse });
-
       if (submitResponse.ok) {
         const data = await submitResponse.json();
-        console.log('Asset created:', data);
       } else {
         const error = await submitResponse.json();
         console.error('Failed to submit transaction:', error);

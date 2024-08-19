@@ -4,15 +4,20 @@
   import TextInput from '$lib/components/TextInput.svelte';
 
   export let formField: FormField;
+  export let onFieldChange = (formField: FormField) => {};
 
-  const fieldSet =
-    formField.type === 'checkbox' ? ['Name', 'Label', 'Checked'] : ['Name', 'Label', 'Required', 'Placeholder'];
+  const fieldSet = formField.type === 'checkbox' ? ['Name', 'Label'] : ['Name', 'Label', 'Required', 'Placeholder'];
 
   const fieldSetData: { title: string; value: any }[] = fieldSet.map((title) => ({ title, value: null }));
 
   function changeField(value, index) {
     fieldSetData[index].value = value;
-    // TODO emit
+    onFieldChange({
+      name: fieldSetData.find((field) => field.title === 'Name')?.value || '',
+      label: fieldSetData.find((field) => field.title === 'Label')?.value || '',
+      required: fieldSetData.find((field) => field.title === 'Required')?.value || null,
+      placeholder: fieldSetData.find((field) => field.title === 'Placeholder')?.value || null
+    });
   }
 </script>
 
@@ -36,6 +41,7 @@
       <TextInput
         disabled
         label={fieldSetData.find((field) => field.title === 'Label')?.value ?? ''}
+        required={fieldSetData.find((field) => field.title === 'Required')?.value}
         placeholder={fieldSetData.find((field) => field.title === 'Placeholder')?.value}
       />
     {/if}

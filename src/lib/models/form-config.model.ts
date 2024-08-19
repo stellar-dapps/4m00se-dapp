@@ -1,6 +1,6 @@
 export interface FormField {
-  name: string;
-  label: string;
+  name?: string;
+  label?: string;
   type?: string; // default = 'text'
   required?: boolean; // default = false
   placeholder?: string | null; // default = null
@@ -12,11 +12,11 @@ interface FormStyles {
 }
 
 export interface FormConfig {
-  id?: string; // asset name
+  id?: string; // stellar asset name
   createdBy?: string; // public key
   createdAt?: Date;
-  name: string;
-  fields: FormField[];
+  name?: string;
+  fields?: FormField[];
   submitUrl?: string;
   submitButtonTitle?: string; // default = 'Submit'
   consent?: string; // default = '', markdown allowed

@@ -23,7 +23,6 @@ export const POST: RequestHandler = async ({ request, fetch }) => {
   const configsFromIpfs: any[] = await listIpfsConfigs(assetCode);
   // 4. Filter files by Pinata's metadata.name (=== assetCode)
   const configOfInterest: PinataFile = configsFromIpfs.find((config) => config.metadata.name === assetCode);
-  console.log({ configOfInterest });
   // 5. Take existing metadata.keyvalues as basis
   const currentSubmissions: FormSubmissionPinataMeta[] =
     JSON.parse(configOfInterest.metadata.keyvalues.submissions) ?? [];

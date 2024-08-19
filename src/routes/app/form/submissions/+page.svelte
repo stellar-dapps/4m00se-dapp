@@ -12,7 +12,7 @@
       <thead>
         <tr>
           <th scope="col">Author</th>
-          {#if $formStore?.selectedAsset?.ipfsData?.fields.length}
+          {#if $formStore?.selectedAsset?.ipfsData?.fields?.length}
             {#each $formStore?.selectedAsset?.ipfsData?.fields as field}
               <th scope="col">{field.name}</th>
             {/each}
@@ -25,9 +25,11 @@
             <th scope="row" title={submission.submittedBy}>
               {submission.submittedBy}
             </th>
-            {#if $formStore?.selectedAsset?.ipfsData?.fields.length}
+            {#if $formStore?.selectedAsset?.ipfsData?.fields?.length}
               {#each $formStore?.selectedAsset?.ipfsData?.fields as field}
-                <td>{submission.formData[field.name] ?? '—'}</td>
+                {#if field?.name}
+                  <td>{submission.formData[field.name] ?? '—'}</td>
+                {/if}
               {/each}
             {/if}
           </tr>

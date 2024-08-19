@@ -5,7 +5,6 @@
   import EmptyState from '$lib/components/EmptyState.svelte';
   import { getFormConfigFromIpfs, listIpfsConfigs } from '$lib/utils/ipfs.ts';
   import { decodeBase64 } from '$lib/utils/decoder.ts';
-  import { handleFakeFormCreate } from '$lib/utils/form-create-manager.ts';
   import { formStore } from '$lib/stores/form.store.ts';
   import type { StellarAccountAsset } from '$lib/models/stellar-account-asset.model.ts';
   import type { FormConfig } from '$lib/models/form-config.model.ts';

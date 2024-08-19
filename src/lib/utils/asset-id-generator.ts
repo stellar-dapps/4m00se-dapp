@@ -18,7 +18,5 @@ export function generateRandomAssetId(
     result += `${characters.charAt(Math.floor(Math.random() * charactersLength))}`;
   }
 
-  console.log('random id', result);
-
   return result;
 }

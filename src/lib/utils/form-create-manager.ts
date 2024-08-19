@@ -10,26 +10,18 @@ const { signTransaction } = FreighterAPI;
 const network = import.meta.env.VITE_STELLAR_NETWORK_URL;
 const networkPassphrase = import.meta.env.VITE_SOROBAN_NETWORK_PASSPHRASE;
 
-export async function handleFakeFormCreate(publicKey: string | null) {
-  if (!publicKey) {
+export async function handleFormCreate(publicKey: string | null, formConfig: FormConfig | null) {
+  if (!publicKey || !formConfig) {
     return;
   }
-  // 1. Get config w/o meta
-  let config = mockStellarConfig;
 
-  // 2. Get (random?) issuer keypair (public key?)
-
-  // 3. Get random form asset id
   let assetCode = generateRandomAssetId();
 
-  // 4. Send data with creation date, form asset id, and issuer public key to IPFS
-  let augmentedConfig: FormConfig = { ...config, createdAt: new Date(), createdBy: publicKey, id: assetCode };
-  // ... and get cid from response
+  let augmentedConfig: FormConfig = { ...formConfig, createdAt: new Date(), createdBy: publicKey, id: assetCode };
+
   let ipfsRecord: PinataResponse | null = await createIpfsFormConfigRecord(augmentedConfig);
   let cid: string | undefined = ipfsRecord?.IpfsHash;
-  console.log({ cid });
 
-  // 5. Create the transaction on the server side (of the dapp)
   const response = await fetch('/api/stellar/create-transaction', {
     method: 'POST',
     headers: {
@@ -46,10 +38,8 @@ export async function handleFakeFormCreate(publicKey: string | null) {
   if (response.ok) {
     const { xdr } = await response.json();
 
-    // 6. Sign the transaction with the Freighter wallet
     const signedTransaction = await signTransaction(xdr, { accountToSign: publicKey, network, networkPassphrase });
 
-    // 7. Submit the signed transaction back to the server (of the dapp)
     const submitResponse = await fetch('/api/stellar/submit-transaction', {
       method: 'POST',
       headers: {
@@ -58,11 +48,8 @@ export async function handleFakeFormCreate(publicKey: string | null) {
       body: JSON.stringify({ xdr: signedTransaction })
     });
 
-    console.log({ submitResponse });
-
     if (submitResponse.ok) {
       const data = await submitResponse.json();
-      console.log('Asset created:', data);
     } else {
       const error = await submitResponse.json();
       console.error('Failed to submit transaction:', error);

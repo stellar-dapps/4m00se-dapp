@@ -21,19 +21,13 @@
   }
 
   async function loadAssets() {
-    console.log('Mounting asset list...');
-
     const response = await fetch(`/api/stellar/get-account-assets?issuerPublicKey=${publicKey}`);
 
     if (response.ok) {
-      console.log('asset response is OK', { response });
       bareAssets = await response.json();
       bareAssets = bareAssets.filter((asset) => asset?.asset_code?.includes('4m00se'));
-      console.log({ assets: bareAssets });
 
       const accountData = await getAccountData(publicKey);
-
-      console.log({ accountData });
 
       const assetPromises = bareAssets.map(async (bareAsset) => {
         let asset = bareAsset;
@@ -42,9 +36,7 @@
         const decodedCid = decodeBase64(cid);
         if (decodedCid) {
           const ipfsData = await getFormConfigFromIpfs(decodedCid);
-          console.log(ipfsData);
           asset.ipfsData = ipfsData;
-          console.log({ asset });
         }
         return asset;
       });

@@ -66,8 +66,6 @@ export const POST: RequestHandler = async ({ request }) => {
       .setTimeout(30)
       .build();
 
-    console.log('ready to respond...');
-
     return new Response(JSON.stringify({ xdr: transaction.toXDR() }), { status: 200 });
   } catch (error: any) {
     return new Response(JSON.stringify({ error: error.message }), { status: 500 });

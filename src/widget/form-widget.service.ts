@@ -64,7 +64,7 @@ export async function getFormConfig(configUrl: string): Promise<FormConfig | nul
 export async function onSubmitDefault(formData: any, formConfig: FormConfig) {
   const { createdBy, id } = formConfig;
 
-  const tx = await signSubmissionTransaction(formConfig.name);
+  const tx = formConfig.name ? await signSubmissionTransaction(formConfig.name) : '';
 
   const response = await fetch(`${baseUrl}/api/stellar/submit-form-data`, {
     method: 'POST',
