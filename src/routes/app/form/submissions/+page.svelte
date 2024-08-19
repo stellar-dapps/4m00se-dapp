@@ -3,6 +3,10 @@
   import { formStore } from '$lib/stores/form.store.js';
 </script>
 
+<svelte:head>
+  <title>4m00se — Form responses</title>
+</svelte:head>
+
 {#if !$formStore.formSubmissionsForSelectedAsset?.length}
   <EmptyState mainTitle="No form responses yet" mainSubTitle="You haven't received any form submissions yet." isNoCta />
 {:else}

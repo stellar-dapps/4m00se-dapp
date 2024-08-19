@@ -82,7 +82,7 @@
 </script>
 
 <svelte:head>
-  <title>4m00se — New form</title>
+  <title>4m00se — {$formStore.selectedAsset ? 'View form' : 'New form'}</title>
 </svelte:head>
 
 {#if !elements?.length && !$formStore.inProgressFormConfig?.fields?.length}

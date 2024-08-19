@@ -120,7 +120,7 @@
 </script>
 
 <svelte:head>
-  <title>4m00se — Dashboard</title>
+  <title>4m00se — Your forms</title>
 </svelte:head>
 
 {#if !$formStore.formAssets?.length}
