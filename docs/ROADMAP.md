@@ -63,6 +63,7 @@
 - [ ] Customizable loader state
 - [ ] Multiple instances per page (multiple base ids)
 - [ ] Customizable spam protection
+- [ ] Generic protection from CORS issues
 
 ## CI/CD
 

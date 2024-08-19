@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let label;
+  export let label = '';
   export let name = '';
   export let value = '';
   export let placeholder: string | null = null;

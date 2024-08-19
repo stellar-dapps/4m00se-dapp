@@ -4,6 +4,7 @@ export interface FormField {
   type?: string; // default = 'text'
   required?: boolean; // default = false
   placeholder?: string | null; // default = null
+  checked?: boolean | null; // specific for checkboxes
 }
 
 interface FormStyles {

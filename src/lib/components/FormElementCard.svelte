@@ -1,18 +1,44 @@
 <script lang="ts">
   import type { FormField } from '$lib/models/form-config.model.ts';
+  import Checkbox from '$lib/components/Checkbox.svelte';
+  import TextInput from '$lib/components/TextInput.svelte';
 
-  export let field: FormField;
+  export let formField: FormField;
+
+  const fieldSet =
+    formField.type === 'checkbox' ? ['Name', 'Label', 'Checked'] : ['Name', 'Label', 'Required', 'Placeholder'];
+
+  const fieldSetData: { title: string; value: any }[] = fieldSet.map((title) => ({ title, value: null }));
+
+  function changeField(value, index) {
+    fieldSetData[index].value = value;
+    // TODO emit
+  }
 </script>
 
 <article class="grid-container">
   <div class="column grid-container-nested">
-    <div class="sub-column">name:</div>
-    <div class="sub-column">
-      {field.name}
-    </div>
+    {#each fieldSetData as field, index}
+      <div class="sub-column">{field.title}</div>
+      <div class="sub-column">
+        {#if field.title === 'Checked' || field.title === 'Required'}
+          <Checkbox checked={field.value} onChange={(checked) => changeField(checked, index)} />
+        {:else}
+          <TextInput value={field.value} onChange={(value) => changeField(value, index)} />
+        {/if}
+      </div>
+    {/each}
   </div>
   <div class="column preview">
-    adasdsada adasdsada adasdsada adasdsada adasdsada adasdsada adasdsada adasdsada adasdsada adasdsada
+    {#if formField.type === 'checkbox'}
+      <Checkbox disabled label={fieldSetData.find((field) => field.title === 'Label')?.value ?? ''} />
+    {:else}
+      <TextInput
+        disabled
+        label={fieldSetData.find((field) => field.title === 'Label')?.value ?? ''}
+        placeholder={fieldSetData.find((field) => field.title === 'Placeholder')?.value}
+      />
+    {/if}
   </div>
 </article>
 

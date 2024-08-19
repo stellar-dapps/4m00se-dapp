@@ -1,7 +1,8 @@
 <script lang="ts">
-  export let label;
+  export let label = '';
   export let name = '';
   export let checked = false;
+  export let disabled = false;
   export let onChange = (event: any) => {};
 
   function handleChange(event: Event) {
@@ -12,7 +13,7 @@
 
 <div class="form-group">
   <label>
-    <input type="checkbox" {name} {checked} on:change={handleChange} />
+    <input type="checkbox" role="switch" {name} {checked} {disabled} on:change={handleChange} />
     {label}
   </label>
 </div>

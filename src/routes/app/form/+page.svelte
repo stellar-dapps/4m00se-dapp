@@ -74,7 +74,7 @@
     onDropdownCtaTrigger={handleElementAdd}
   />
 {:else}
-  {#if codeContent && !$formStore.inProgressFormConfig}
+  {#if $formStore.selectedAsset && codeContent}
     <section>
       <CodeSnippet {codeContent} />
     </section>
@@ -104,7 +104,7 @@
       {#if $formStore.inProgressFormConfig}
         <section>
           {#each $formStore.inProgressFormConfig?.fields as field, index}
-            <FormElementCard {field} />
+            <FormElementCard formField={field} />
           {/each}
         </section>
 

@@ -6,11 +6,11 @@ export const formElementSelectOptions: FormElementOption[] = [
     type: 'text',
     id: '1'
   },
-  {
-    title: 'Email address',
-    type: 'email',
-    id: '2'
-  },
+  // {
+  //   title: 'Email address',
+  //   type: 'email',
+  //   id: '2'
+  // },
   {
     title: 'Yes/No option',
     type: 'checkbox',
