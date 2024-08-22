@@ -16,13 +16,14 @@
 ## UI
 
 - [ ] Implement and polish UI with due respect to the Figma mockups
+- [ ] Footer processing — no need for it inside the app
 - [ ] Full-screen modal component for form preview and template selection
 - [ ] Extend available form control set and additional helper elements
 - [ ] Make search work
 - [ ] Proper loading / errors display
 - [ ] Smoothen interactions and transitions, especially auth
 - [ ] Polish alfa version alert and logged-in alert banners, show conditionally with adjusted content
-- [ ] Profile page
+- [ ] Profile page and avatar autogeneration
 - [ ] Dark/light mode switcher
 - [ ] Drag-n-drop for form builder
 - [ ] Pagination
