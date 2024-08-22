@@ -16,6 +16,7 @@
 ## UI
 
 - [ ] Implement and polish UI with due respect to the Figma mockups
+- [ ] Full-screen modal component for form preview and template selection
 - [ ] Extend available form control set and additional helper elements
 - [ ] Make search work
 - [ ] Proper loading / errors display
@@ -26,6 +27,7 @@
 - [ ] Drag-n-drop for form builder
 - [ ] Pagination
 - [ ] Styling tab for form builder
+- [ ] Custom 404 page
 
 ## Soroban smart contracts
 
@@ -80,6 +82,8 @@
 
 ## Development and tech debt
 
+- [ ] Clean up temporary and unused stuff (clean up TODOs — move here if necessary)
+- [ ] Disable Render self-ping
 - [ ] Mainnet adjustments
 - [ ] Thorough error processing
 - [ ] Consider proper monitoring and error tracking
@@ -112,7 +116,11 @@
 
 ## Marketing and demos
 
-- [ ] Blog page
+- [ ] Polish disclaimer to give more generic context on the dapp nature
+- [ ] Emphasize "progressive decentralization" approach of the app
+- [ ] Blog page, like [described here](https://rodneylab.com/sveltekit-blog-starter/), for instance
 - [ ] Guest book as a demo form with interactive results
 - [ ] Open source starter template as a promo, tutorial for that
 - [ ] Comparison with other onchain/offchain solutions
+- [ ] SEO meta, like [described here](https://rodneylab.com/sveltekit-seo/)
+- [ ] Dynamic stackblitz/codesandbox/glitch examples
