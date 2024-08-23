@@ -111,7 +111,8 @@
 
 ## Repository
 
-- [ ] Isolate local and CI/CD scripts
+- [ ] Isolate local and CI/CD scripts inside package.json
+- [ ] Move script files to a separate folder
 - [ ] Add custom labels and automation for them
 - [ ] Add simple code style guide
 

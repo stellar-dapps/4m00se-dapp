@@ -195,7 +195,7 @@ See `/static/demo/...` for real-life usage examples.
 
 ## Contributing
 
-Contributions are welcome! Please refer to [CONTRIBUTING.md](docs/CONTRIBUTING.md).
+Contributions are welcome! Please refer to [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 

@@ -41,3 +41,8 @@ src/contracts/*
 
 # build-time generated artefacts
 static/widget
+static/docs
+
+# vitepress docs artefacts
+docs/.vitepress/cache
+docs/.vitepress/dist
