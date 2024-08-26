@@ -102,10 +102,10 @@
 
 ## Documentation
 
-- Polish README documentation display on the website
+- Polish documentation display on the website
 - Add architecture description
 - Add tutorial
-- Consider separate documentation page
+- ~~Consider separate documentation page~~
 - Annotate project structure
 - Interactive onboarding flow
 
@@ -120,7 +120,7 @@
 
 - Polish disclaimer to give more generic context on the dapp nature
 - Emphasize "progressive decentralization" approach of the app
-- Blog page, like [described here](https://rodneylab.com/sveltekit-blog-starter/), for instance
+- ~~Blog page, like [described here](https://rodneylab.com/sveltekit-blog-starter/), for instance~~
 - Guest book as a demo form with interactive results
 - Open source starter template as a promo, tutorial for that
 - Comparison with other onchain/offchain solutions

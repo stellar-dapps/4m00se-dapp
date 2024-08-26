@@ -49,4 +49,6 @@
   <slot />
 </main>
 
-<Footer />
+{#if !$page.url.pathname.includes('/app')}
+  <Footer />
+{/if}
