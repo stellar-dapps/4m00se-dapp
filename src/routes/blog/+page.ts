@@ -5,6 +5,7 @@ export const prerender = true;
 export async function load() {
   const posts = import.meta.glob('./*.md', { eager: true });
 
+  // TODO tweak sorting
   const postList: BlogPostListItem[] = Object.keys(posts).map((path) => {
     const file = posts[path] as BlogDataFromFileSystem;
     const slug = path.split('/').pop()?.replace('.md', '') as string;

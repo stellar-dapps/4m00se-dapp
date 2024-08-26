@@ -4,6 +4,6 @@ description: A couple of words about 4m00se project background and ideas that la
 createdAt: August 26, 2024
 ---
 
-# {title}
+This is the content of my first blog post. This is the content of my first blog post. This is the content of my first blog post. This is the content of my first blog post.
 
-This is the content of my first blog post.
+This is the content of my first blog post. This is the content of my first blog post. This is the content of my first blog post. This is the content of my first blog post.
