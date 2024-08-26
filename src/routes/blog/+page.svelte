@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { BlogPageData } from '$lib/models/blog.model.ts';
+  import { goto } from '$app/navigation';
 
   export let data: BlogPageData;
 </script>
@@ -8,13 +9,29 @@
   <title>4m00se Blog</title>
 </svelte:head>
 
-<main>
-  <h1>Blog</h1>
-  <ul>
-    {#each data.posts as post}
-      <li>
-        <a href={`/blog/${post.slug}`}>{post.title}</a>
-      </li>
-    {/each}
-  </ul>
-</main>
+<h1>Blog</h1>
+<ul class="list-unstyled">
+  {#each data.posts as post}
+    <li>
+      <article on:click={() => goto(`/blog/${post.slug}`)}>
+        <div>{post.createdAt}</div>
+        <h3>{post.title}</h3>
+        <div>{post.description}</div>
+      </article>
+    </li>
+  {/each}
+</ul>
+
+<style>
+  article {
+    cursor: pointer;
+    color: var(--pico-muted-color);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  h3 {
+    color: var(--pico-color);
+    margin: 0;
+  }
+</style>

@@ -10,7 +10,9 @@ export async function load() {
     const slug = path.split('/').pop()?.replace('.md', '') as string;
     return {
       slug,
-      title: file.metadata.title
+      title: file.metadata.title,
+      description: file.metadata.description,
+      createdAt: file.metadata.createdAt
     };
   });
 

@@ -37,11 +37,11 @@
 
 <Header />
 
-{#if isMobile || $page.url.pathname.includes('/docs')}
+{#if isMobile}
   <Banner isWarning />
 {/if}
 
-{#if authBlockedReason}
+{#if authBlockedReason && $page.url.pathname === '/'}
   <Banner bannerText={authBlockedReason} />
 {/if}
 

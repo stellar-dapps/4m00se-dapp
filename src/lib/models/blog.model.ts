@@ -8,6 +8,8 @@ export interface BlogDataFromFileSystem {
 export interface BlogPostListItem {
   slug: string;
   title: string;
+  description: string;
+  createdAt: string;
 }
 
 export interface BlogPageData {

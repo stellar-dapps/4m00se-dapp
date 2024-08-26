@@ -8,6 +8,4 @@
   <title>{data.metadata.title} — 4m00se Blog</title>
 </svelte:head>
 
-<main>
-  <svelte:component this={data.content} />
-</main>
+<svelte:component this={data.content} />
