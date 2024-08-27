@@ -1,21 +1,28 @@
-import type { BlogDataFromFileSystem, BlogPostListItem } from '$lib/models/blog.model.ts';
+import type { PageLoad } from './$types';
+import { slugFromPath } from '$lib/utils/slug-from-path.ts';
 
 export const prerender = true;
 
-export async function load() {
-  const posts = import.meta.glob('./*.md', { eager: true });
+const MAX_POSTS = 10;
 
-  // TODO tweak sorting
-  const postList: BlogPostListItem[] = Object.keys(posts).map((path) => {
-    const file = posts[path] as BlogDataFromFileSystem;
-    const slug = path.split('/').pop()?.replace('.md', '') as string;
-    return {
-      slug,
-      title: file.metadata.title,
-      description: file.metadata.description,
-      createdAt: file.metadata.createdAt
-    };
-  });
+export const load: PageLoad = async ({ params }) => {
+  const modules = import.meta.glob(`/src/blogposts/*.{md,svx,svelte.md}`);
 
-  return { posts: postList };
-}
+  const postPromises = Object.entries(modules).map(([path, resolver]) =>
+    resolver().then(
+      (post) =>
+        ({
+          slug: slugFromPath(path),
+          ...(post as unknown as App.MdsvexFile).metadata
+        }) as App.BlogPost
+    )
+  );
+
+  const posts = await Promise.all(postPromises);
+
+  const publishedPosts = posts.filter((post) => post.published).slice(0, MAX_POSTS);
+
+  publishedPosts.sort((a, b) => (new Date(a.date) > new Date(b.date) ? -1 : 1));
+
+  return { posts: publishedPosts };
+};

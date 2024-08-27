@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type { BlogPageData } from '$lib/models/blog.model.ts';
+  import type { PageData } from './$types';
   import { goto } from '$app/navigation';
 
-  export let data: BlogPageData;
+  export let data: PageData;
 </script>
 
 <svelte:head>
@@ -14,9 +14,10 @@
   {#each data.posts as post}
     <li>
       <article on:click={() => goto(`/blog/${post.slug}`)}>
-        <div>{post.createdAt}</div>
+        <div>{post.date}</div>
         <h3>{post.title}</h3>
         <div>{post.description}</div>
+        <div>By {post.author}</div>
       </article>
     </li>
   {/each}
