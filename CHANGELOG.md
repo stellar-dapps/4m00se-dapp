@@ -28,7 +28,7 @@ Slightly polished functionality from the `0.11.0-alpha` release
 
 ### Removed
 
-### Security
+- Render self-ping API route
 
 ## 0.11.0-alpha
 
