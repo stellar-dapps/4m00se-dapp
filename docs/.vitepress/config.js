@@ -17,22 +17,26 @@ export default defineConfig({
       },
       {
         text: 'User guide',
-        items: [{ text: 'Quick start', link: '/guide/' }]
-      },
-      {
-        text: 'Architecture',
-        items: [{ text: 'Project philosophy', link: '/architecture/' }]
+        items: [{ text: 'Form builder quick start', link: '/guide/' }]
       },
       {
         text: 'Widget reference',
-        items: [{ text: 'Getting started', link: '/reference/' }]
+        items: [{ text: 'Getting started with form widgets', link: '/reference/' }]
+      },
+      {
+        text: 'Architecture',
+        items: [
+          { text: 'Project philosophy', link: '/architecture/' },
+          { text: 'Form data flow 101', link: '/architecture/data-flow' }
+        ]
       },
       {
         text: 'Developer guide',
         items: [
-          { text: 'Getting started', link: '/dev/' },
-          { text: 'Project roadmap', link: '/dev/roadmap/' },
-          { text: 'Developer resources', link: '/dev/resources/' }
+          { text: 'Getting started guide for developers', link: '/dev/' },
+          { text: 'Project development roadmap', link: '/dev/roadmap' },
+          { text: 'Developer resources', link: '/dev/resources' },
+          { text: 'Using as a project starter', link: '/dev/starter' }
         ]
       }
     ]

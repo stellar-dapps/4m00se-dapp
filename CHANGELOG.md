@@ -14,9 +14,17 @@ Slightly polished functionality from the `0.11.0-alpha` release
 
 ### Added
 
+- This changelog for tracking updates between versions
+- New blog page built with MDsveX
+
 ### Changed
 
+- New docs page built with Vitepress, old docs are restructured
+- Branded favicon
+
 ### Fixed
+
+- Automated navigation flow on Freighter wallet detection
 
 ### Removed
 

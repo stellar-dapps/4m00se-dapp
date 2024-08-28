@@ -2,6 +2,7 @@
 
 ## Product
 
+- Progressive decentralization flow adjustments
 - Dogfood by collecting dapp feedback with a pop-up widget
 - Hosted forms ([Fleek](https://fleek.co/) possibly)
 - Using for blog-like website comments
@@ -16,7 +17,6 @@
 ## UI
 
 - Implement and polish UI with due respect to the Figma mockups
-- Footer processing — no need for it inside the app
 - Full-screen modal component for form preview and template selection
 - Extend available form control set and additional helper elements
 - Make search work
@@ -29,6 +29,7 @@
 - Pagination
 - Styling tab for form builder
 - Custom 404 page
+- ~~Footer processing — no need for it inside the app~~
 
 ## Soroban smart contracts
 
@@ -57,6 +58,7 @@
 
 ## Widget
 
+- Generic protection from CORS issues
 - Style and font customizations, and also dark/light mode settings, or a flag to ignore/override system settings
 - Optimize the build size (stylesheet trimming, minimal custom markdown parser)
 - Client side result screen / server side url redirect
@@ -66,7 +68,7 @@
 - Customizable loader state
 - Multiple instances per page (multiple base ids)
 - Customizable spam protection
-- Generic protection from CORS issues
+- Progressive web2 degradation flow (support for direct config setting instead of config URLs)
 
 ## CI/CD
 
@@ -78,14 +80,14 @@
 
 - Optimize Render deployment / consider alternatives
 - Widget: Use CDN for script distribution
-- Widget: Package to npm
+- Widget: Package to npm/JSR
 - Release and changelog flow
 
 ## Development and tech debt
 
 - Clean up temporary and unused stuff (clean up TODOs — move here if necessary)
-- Disable Render self-ping
-- Mainnet adjustments
+- Analyze how Svelte stores work on client now and won't there be any issues/leaks with them — consider migration to signals or something
+- Stellar mainnet integration adjustments
 - Thorough error processing
 - Consider proper monitoring and error tracking
 - Proper TypeScript types everywhere
@@ -99,15 +101,17 @@
 - Proper parametrized routing
 - Check asset name uniqueness on creation
 - API docs autogeneration
+- ~~Disable Render self-ping~~
 
 ## Documentation
 
-- Polish documentation display on the website
 - Add architecture description
 - Add tutorial
-- ~~Consider separate documentation page~~
 - Annotate project structure
 - Interactive onboarding flow
+- More meaningful documentation page topbar
+- ~~Consider separate documentation page~~
+- ~~Polish documentation display on the website~~
 
 ## Repository
 
@@ -121,9 +125,9 @@
 
 - Polish disclaimer to give more generic context on the dapp nature
 - Emphasize "progressive decentralization" approach of the app
-- ~~Blog page, like [described here](https://rodneylab.com/sveltekit-blog-starter/), for instance~~
 - Guest book as a demo form with interactive results
 - Open source starter template as a promo, tutorial for that
 - Comparison with other onchain/offchain solutions
 - SEO meta, like [described here](https://rodneylab.com/sveltekit-seo/)
 - Dynamic stackblitz/codesandbox/glitch examples
+- ~~Blog page, like [described here](https://rodneylab.com/sveltekit-blog-starter/), for instance~~
