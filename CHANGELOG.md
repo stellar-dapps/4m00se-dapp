@@ -10,7 +10,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 _released `?`_
 
-Release summary...
+Slightly polished functionality from the `0.11.0-alpha` release
 
 ### Added
 
@@ -26,6 +26,12 @@ Release summary...
 
 _released `2024-08-19`_
 
-Release summary...
+Basic skeleton and functionality for **4m00se** project, built for Build with Stellar challenge and described [here](https://dev.to/fyodorio/create-embeddable-forms-widgets-for-decentralized-internet-1dni), including:
 
-- Initial functionality overview
+- Land on main dapp page with 4m00se overview
+- Get basic documentation from README
+- "Log in" with Freighter wallet
+- Create a basic form (text fields and checkboxes) in WYSIWYG builder UI, store the resulting form config on IPFS and sign it with Freighter wallet on Stellar testnet to further gather submissions for it
+- Get form embedding HTML code snippet for the created, stored and signed form config
+- Working example of 4m00se form widget integration into a web page allowing to submit a form and sign the submission with Freighter wallet on Stellar testnet
+- Get and analyse the list of Freigher-signed submissions made for the form snippet for the user-created form config
