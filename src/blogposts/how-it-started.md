@@ -18,4 +18,4 @@ This idea _already_ works for me on the current stage of the development, and I 
 
 And of course, I will proceed building **4m00se** and making it shine, teamed with my partner — the best UI/UX designer in the world — [Maria](https://uxapologist.com/).
 
-If you want to get to know more about the project, check out [the documentation](https://4m00se/docs), [the GitHub repository](https://github.com/stellar-dapps/4m00se-dapp), and don't hesitate to let me know what do you think about it.
+If you want to get to know more about the project, check out [the documentation](https://4m.lol/docs), [the GitHub repository](https://github.com/stellar-dapps/4m00se-dapp), and don't hesitate to let me know what do you think about it.

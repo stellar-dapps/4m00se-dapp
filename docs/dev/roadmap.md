@@ -87,6 +87,7 @@
 
 - Clean up temporary and unused stuff (clean up TODOs — move here if necessary)
 - Analyze how Svelte stores work on client now and won't there be any issues/leaks with them — consider migration to signals or something
+- Find a way to invalidate docs build caches
 - Stellar mainnet integration adjustments
 - Thorough error processing
 - Consider proper monitoring and error tracking
