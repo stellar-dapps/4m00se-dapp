@@ -1,6 +1,6 @@
-# 4m00se — form management platform
+# 4m00se — web3-enabled form widgets builder
 
-4m00se is a decentralized application (dApp) built on the Stellar network. It consists of a form builder and form submission reader functionality, tied together via embeddable form widgets. The application is server-rendered and decentralized, utilizing the Stellar network and Soroban for blockchain transaction management and IPFS for form configuration storage and submission collecting.
+See [the official website](https://4m.lol) for the details on the application, its architecture, philosophy, and also the user guides and the developer guides.
 
 ## Table of Contents
 
@@ -15,15 +15,14 @@
 
 ## Introduction
 
-4m00se is designed to provide a seamless experience for creating and managing forms on the Stellar network. It leverages the power of decentralized storage and blockchain technology to ensure data integrity and security.
+4m00se is a decentralized application designed to provide a seamless experience for creating and managing forms, both on the blockchain, and outside of it (pure habitual web2 flow). It leverages the power of decentralized storage (IPFS via Pinata) and blockchain technology (Stellar/Soroban) to ensure data integrity and security, but also allows to work with JSON directly and use HTML widgets with custom user-provided callbacks.
 
-## Features
+## Major features
 
-- **Form builder**: Create custom forms with ease.
-- **Form submission reader**: Read and manage form submissions.
-- **Decentralized storage**: All data is stored as transactions on the Stellar network or written to IPFS.
-- **Embeddable widgets**: Easily embed forms into other applications.
-- **Documentation**: Comprehensive documentation for users and developers.
+- **Form builder**: Create custom forms with ease via WYSIWYG interface.
+- **Form submission reader**: Read and manage form responses for each of the forms.
+- **Decentralized storage**: All form data (both config and user responses) can be stored as transactions on the Stellar network and linked to IPFS for JSON storage itself.
+- **Embeddable widgets**: Easily embed forms into other web pages and applications via simple unique HTML code snippets.
 
 ## Technology Stack
 
@@ -32,16 +31,21 @@
   - SvelteKit
   - TypeScript
   - Vite
-  - PicoCSS (UI library)
+  - VitePress (documentation)
+  - MDsveX (blog)
+  - PicoCSS
 
 - **Embeddable Widget**:
 
   - Svelte
   - TypeScript
+  - markdown-it
+  - PicoCSS
   - Rollup
 
 - **Smart Contracts**:
 
+  - Rust
   - Soroban
 
 - **Authentication**:
@@ -49,7 +53,7 @@
   - Freighter Wallet API
 
 - **Data Storage**:
-  - Stellar Network
+  - Stellar Network API/SDK
   - IPFS (via Pinata API/SDK)
 
 ## Installation
@@ -66,8 +70,8 @@
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/4m00se.git
-cd 4m00se
+git clone git@github.com:stellar-dapps/4m00se-dapp.git
+cd 4m00se-dapp
 ```
 
 2. Install dependencies:
@@ -94,7 +98,13 @@ cp .env.example .env
 npm run init
 ```
 
-6. Start the development server:
+6. Build the documentation pages
+
+```bash
+npm run docs:build
+```
+
+7. Start the development server
 
 ```bash
 npm run dev
@@ -104,15 +114,15 @@ npm run dev
 
 ### Form Builder
 
-- Navigate to the form builder page.
+- Navigate to the form builder page and log in via browser's Freighter wallet extension (use testnet).
 - Create a new form by adding fields and configuring options.
-- Save the form to the Stellar network.
+- Preview and save the form.
 - Get embeddable widget code and instructions.
 
-### Form Submission Reader
+### Form Responses
 
-- Navigate to the form submission reader page.
-- View and manage form submissions stored on the Stellar network.
+- Navigate to the form responses subpage.
+- View and manage form submissions.
 
 ### Embeddable Widget
 
@@ -140,11 +150,11 @@ You can configure the following parameters of a form widget:
 
 - `configUrl` — required, generated when a form is built
 - `container` — optional, gives the possibility to use custom container id instead of the default `4m00se-widget-container`
-- `onSubmit` — optional, gives the possibility to use custom callback on form submission (by default, dedicate Freighter transaction signing flow is triggered)
+- `onSubmit` — optional, gives the possibility to use custom callback on form submission (by default, dedicated Freighter transaction signing flow is triggered)
 
 ### Examples
 
-See `/static/demo/...` for real-life usage examples.
+See `/static/demo/...` for real-life usage example(s).
 
 ## Project Structure
 
@@ -156,9 +166,13 @@ See `/static/demo/...` for real-life usage examples.
 │       │   ├── lib.rs
 │       │   └── test.rs
 │       └── Cargo.toml
+├── docs/
+│   └── ...
 ├── packages/
 │   └── ...
 ├── src/
+│   └── blogposts/
+│   │   └── ...
 │   └── contracts/
 │   │   ├── ...
 │   │   └── util.ts
@@ -180,7 +194,8 @@ See `/static/demo/...` for real-life usage examples.
 │   │   └── ...
 │   ├── app.css
 │   ├── app.d.ts
-│   └── app.html
+│   ├── app.html
+│   └── env.d.ts
 ├── static/
 │   ├── demo/
 │   └── ...
@@ -188,6 +203,7 @@ See `/static/demo/...` for real-life usage examples.
 ├── initialize.js
 ├── package.json
 ├── rollup.config.js
+├── setup_env.sh
 ├── svelte.config.js
 ├── vite.config.ts
 └── ...
@@ -195,8 +211,8 @@ See `/static/demo/...` for real-life usage examples.
 
 ## Contributing
 
-Contributions are welcome! Please refer to [CONTRIBUTING.md](docs/CONTRIBUTING.md).
+Contributions are welcome! Please refer to [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache-2.0 license. See the [LICENSE](LICENSE) file for details.

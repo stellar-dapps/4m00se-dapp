@@ -6,7 +6,7 @@ Thank you for your interest in contributing to 4m00se! We welcome contributions 
 
 ### Ideation
 
-Take a look at the [roadmap](ROADMAP.md) to see what thoughts/ideas/suggestions for development you may have, and don't hesitate to jump into [discussions](https://github.com/stellar-dapps/4m00se-dapp/discussions) with them.
+Take a look at the [roadmap](https://4m.lol/docs/dev/roadmap) to see what thoughts/ideas/suggestions for development you may have, and don't hesitate to jump into [discussions](https://github.com/stellar-dapps/4m00se-dapp/discussions) with them.
 
 ### Starting a discussion
 
@@ -33,6 +33,6 @@ Please follow the existing code style and guidelines in the repository. If you h
 
 ### License
 
-By contributing to 4m00se, you agree that your contributions will be licensed under the same [license](../LICENSE) as the project.
+By contributing to 4m00se, you agree that your contributions will be licensed under the same [license](LICENSE) as the project.
 
 Thank you for your contributions!

@@ -48,6 +48,10 @@
 </li>
 
 {#if !$page.url.pathname.includes('/app')}
+  <li>
+    <a href="/blog" class="secondary" class:contrast={$page.url.pathname.includes('/blog')}>Blog</a>
+  </li>
+
   <li><a href="https://github.com/stellar-dapps/4m00se-dapp" class="secondary" target="_blank">GitHub</a></li>
   <li>
     <a href="/demo/Stellar _ Build Better on Stellar_ Smart Contract Challenge.html" class="secondary" target="_blank"

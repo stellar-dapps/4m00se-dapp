@@ -48,19 +48,20 @@
     if (await isConnected()) {
       await setAllowed();
       const publicKey = await getStellarPublicKey();
-      await setLoggedIn(publicKey);
+      await setLoggedIn(publicKey, true);
     } else {
       setWalletIsNotAvailable();
     }
   }
 
-  async function setLoggedIn(publicKey: string) {
+  /** Redirect to app if logging in was triggered explicitly (by log in button), ignore redirect otherwise */
+  async function setLoggedIn(publicKey: string, isExplicit = false) {
     isButtonDisabled = true;
     buttonText = publicKey;
     stellarPublicKey = publicKey;
     authStore.set({ isAuthenticated: true, user: publicKey, authBlockedReason: null });
     isWalledActionInProgress = false;
-    goto('/app');
+    isExplicit && goto('/app');
   }
 
   function setWalletIsLocked() {
