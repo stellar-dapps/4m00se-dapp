@@ -116,11 +116,11 @@
 
 ## Repository
 
-- Isolate local and CI/CD scripts inside package.json
-- Move script files to a separate folder
 - Add custom labels and automation for them
 - Add simple code style guide
 - ~~Add [changelog](https://xavd.id/blog/post/effective-changelogs) following common [practices](https://keepachangelog.com/en/1.1.0/)~~
+- ~~Isolate local and CI/CD scripts inside package.json~~
+- ~~Move script files to a separate folder~~
 
 ## Marketing and demos
 

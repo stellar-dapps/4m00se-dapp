@@ -1,8 +1,9 @@
-import { copyFileSync, mkdirSync, readdirSync, statSync } from 'fs';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
+/** Copy VitePress docs for static serving inside SvelteKit */
+import { copyFileSync, mkdirSync, readdirSync } from 'fs';
+import { join } from 'path';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+// Get the root directory of the project
+const __dirname = process.cwd();
 
 const sourceDir = join(__dirname, 'docs', '.vitepress', 'dist');
 const destDir = join(__dirname, 'static', 'docs');

@@ -86,25 +86,31 @@ npm install
 cp .env.example .env
 ```
 
-4. Initialize environment for smart contracts, as mentioned above, if it's not there yet
+4. [Optional] Initialize environment for smart contracts, as mentioned above, if it's not there yet
 
 ```bash
-./setup_env.sh
+npm run setup-environment
 ```
 
-5. Initiate the contracts and their TS clients for the dapp to work with
+5. [Optional] Initiate the contracts and their TS clients for the dapp to work with (included into the previous step so not necessary if it was run already, but also can be run separately for existing Rust/Soroban environment)
 
 ```bash
-npm run init
+node scripts/initialize.js
 ```
 
-6. Build the documentation pages
+6. [Optional but recommended] Build the documentation pages
 
 ```bash
-npm run docs:build
+npm run build:docs
 ```
 
-7. Start the development server
+7. [Optional] Build widget bundle
+
+```bash
+npm run build:widget
+```
+
+8. Start the development server
 
 ```bash
 npm run dev
@@ -170,6 +176,8 @@ See `/static/demo/...` for real-life usage example(s).
 │   └── ...
 ├── packages/
 │   └── ...
+├── scripts/
+│   └── ...
 ├── src/
 │   └── blogposts/
 │   │   └── ...
@@ -200,10 +208,8 @@ See `/static/demo/...` for real-life usage example(s).
 │   ├── demo/
 │   └── ...
 ├── Cargo.toml
-├── initialize.js
 ├── package.json
 ├── rollup.config.js
-├── setup_env.sh
 ├── svelte.config.js
 ├── vite.config.ts
 └── ...

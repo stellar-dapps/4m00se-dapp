@@ -1,11 +1,12 @@
+/**
+ * Initialization script for using Soroban smart contracts as packages in the consuming Node (SvelteKit here) app code
+ * Based on the flow from https://developers.stellar.org/docs/build/apps/dapp-frontend and https://github.com/stellar/soroban-astro-template
+ * */
 import 'dotenv/config';
 import { mkdirSync, writeFileSync, rmSync, readFileSync } from 'fs';
 import { execSync } from 'child_process';
 import path from 'path';
-import { fileURLToPath } from 'url';
 import { sync as glob } from 'glob';
-
-/* Based on the flow from https://developers.stellar.org/docs/build/apps/dapp-frontend and https://github.com/stellar/soroban-astro-template */
 
 // Load environment variables starting with VITE_ into the environment,
 // so we don't need to specify duplicate variables in .env
@@ -17,9 +18,8 @@ for (const key in process.env) {
 
 console.log('###################### Initializing ########################');
 
-// Get dirname (equivalent to the Bash version)
-const __filename = fileURLToPath(import.meta.url);
-const dirname = path.dirname(__filename);
+// Get the root directory of the project
+const __dirname = process.cwd();
 
 // variable for later setting pinned version of soroban in "$(dirname/target/bin/soroban)"
 const cli = 'stellar';
@@ -40,8 +40,8 @@ function removeFiles(pattern) {
 }
 
 function buildAll() {
-  removeFiles(`${dirname}/target/wasm32-unknown-unknown/release/*.wasm`);
-  removeFiles(`${dirname}/target/wasm32-unknown-unknown/release/*.d`);
+  removeFiles(`${__dirname}/target/wasm32-unknown-unknown/release/*.wasm`);
+  removeFiles(`${__dirname}/target/wasm32-unknown-unknown/release/*.d`);
   exe(`${cli} contract build`);
 }
 
@@ -54,16 +54,16 @@ function deploy(wasm) {
 }
 
 function deployAll() {
-  const contractsDir = `${dirname}/.soroban/contract-ids`;
+  const contractsDir = `${__dirname}/.soroban/contract-ids`;
   mkdirSync(contractsDir, { recursive: true });
 
-  const wasmFiles = glob(`${dirname}/target/wasm32-unknown-unknown/release/*.wasm`);
+  const wasmFiles = glob(`${__dirname}/target/wasm32-unknown-unknown/release/*.wasm`);
 
   wasmFiles.forEach(deploy);
 }
 
 function contracts() {
-  const contractFiles = glob(`${dirname}/.soroban/contract-ids/*.json`);
+  const contractFiles = glob(`${__dirname}/.soroban/contract-ids/*.json`);
 
   return contractFiles
     .map((path) => ({
@@ -75,7 +75,9 @@ function contracts() {
 }
 
 function bind({ alias, id }) {
-  exe(`${cli} contract bindings typescript --contract-id ${id} --output-dir ${dirname}/packages/${alias} --overwrite`);
+  exe(
+    `${cli} contract bindings typescript --contract-id ${id} --output-dir ${__dirname}/packages/${alias} --overwrite`
+  );
 }
 
 function bindAll() {
@@ -83,7 +85,7 @@ function bindAll() {
 }
 
 function importContract({ id, alias }) {
-  const outputDir = `${dirname}/src/contracts/`;
+  const outputDir = `${__dirname}/src/contracts/`;
 
   mkdirSync(outputDir, { recursive: true });
 

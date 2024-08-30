@@ -1,5 +1,7 @@
 #!/bin/bash
 
+## THE RUST ENVIRONMENT SETUP FOR SOROBAN SMART CONTRACTS
+
 # Set execute permissions for the script
 chmod +x $0
 
@@ -12,5 +14,5 @@ rustup target add wasm32-unknown-unknown
 # Install the Stellar CLI
 cargo install --locked stellar-cli --features opt
 
-# Call the Node.js script
-node initialize.js
+# Call the Node script for initializing Soroban contract packages used in the client app
+node scripts/initialize.js
