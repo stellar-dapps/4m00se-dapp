@@ -1,5 +1,4 @@
 import { generateRandomAssetId } from '$lib/utils/asset-id-generator.ts';
-import { mockStellarConfig } from '$lib/content/mocks/stellar-config.ts';
 import type { FormConfig } from '$lib/models/form-config.model.ts';
 import { createIpfsFormConfigRecord } from '$lib/utils/ipfs.ts';
 import type { PinataResponse } from '$lib/models/pinata-response.model.ts';

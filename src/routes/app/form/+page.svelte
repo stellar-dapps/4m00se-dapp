@@ -4,7 +4,7 @@
   import type { FormConfig, FormField } from '$lib/models/form-config.model.ts';
   import TextInput from '$lib/components/TextInput.svelte';
   import Checkbox from '$lib/components/Checkbox.svelte';
-  import CodeSnippet from '$lib/components/test/CodeSnippet.svelte';
+  import CodeSnippet from '$lib/components/CodeSnippet.svelte';
   import FormElementCard from '$lib/components/FormElementCard.svelte';
   import { formElementSelectOptions } from '$lib/content/settings/form-element-select.config.ts';
   import Dropdown from '$lib/components/Dropdown.svelte';
