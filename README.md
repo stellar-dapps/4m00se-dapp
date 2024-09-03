@@ -15,14 +15,14 @@ See [the official website](https://4m.lol) for the details on the application, i
 
 ## Introduction
 
-4m00se is a decentralized application designed to provide a seamless experience for creating and managing forms, both on the blockchain, and outside of it (pure habitual web2 flow). It leverages the power of decentralized storage (IPFS via Pinata) and blockchain technology (Stellar/Soroban) to ensure data integrity and security, but also allows to work with JSON directly and use HTML widgets with custom user-provided callbacks.
+4m00se is a decentralized-by-default application designed to provide a seamless experience for creating and managing forms, both on the blockchain, and outside of it (pure habitual web2 flow). It leverages the power of decentralized storage (IPFS via Pinata) and blockchain technology (Stellar/Soroban) to ensure data integrity and security, but also allows to work with JSON directly and use HTML widgets with custom user-provided callbacks.
 
 ## Major features
 
-- **Form builder**: Create custom forms with ease via WYSIWYG interface.
+- **WYSIWYG Form builder**: Create custom forms with ease via simple web interface.
+- **Embeddable widgets**: Easily embed forms you'd built into web pages and applications via simple unique HTML code snippets.
 - **Form submission reader**: Read and manage form responses for each of the forms.
 - **Decentralized storage**: All form data (both config and user responses) can be stored as transactions on the Stellar network and linked to IPFS for JSON storage itself.
-- **Embeddable widgets**: Easily embed forms into other web pages and applications via simple unique HTML code snippets.
 
 ## Technology Stack
 
@@ -31,8 +31,8 @@ See [the official website](https://4m.lol) for the details on the application, i
   - SvelteKit
   - TypeScript
   - Vite
-  - VitePress (documentation)
-  - MDsveX (blog)
+  - VitePress (the documentation)
+  - MDsveX (the blog)
   - PicoCSS
 
 - **Embeddable Widget**:
@@ -42,11 +42,6 @@ See [the official website](https://4m.lol) for the details on the application, i
   - markdown-it
   - PicoCSS
   - Rollup
-
-- **Smart Contracts**:
-
-  - Rust
-  - Soroban
 
 - **Authentication**:
 
@@ -185,7 +180,6 @@ See `/static/demo/...` for real-life usage example(s).
 │   │   ├── ...
 │   │   └── util.ts
 │   ├── lib/
-│   │   ├── api/
 │   │   ├── components/
 │   │   ├── content/
 │   │   ├── models/
