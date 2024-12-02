@@ -14,10 +14,10 @@
 
   let { children }: Props = $props();
 
-  let authBlockedReason: string | null | undefined = $state();
+  let authBlockedReason: string | null = $state(null);
 
   authStore.subscribe((value) => {
-    authBlockedReason = value.authBlockedReason;
+    authBlockedReason = value?.authBlockedReason;
   });
 
   let isMobile = $state(false);
