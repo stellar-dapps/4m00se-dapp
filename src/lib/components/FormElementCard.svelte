@@ -3,12 +3,16 @@
   import Checkbox from '$lib/components/Checkbox.svelte';
   import TextInput from '$lib/components/TextInput.svelte';
 
-  export let formField: FormField;
-  export let onFieldChange = (formField: FormField) => {};
+  interface Props {
+    formField: FormField;
+    onFieldChange?: any;
+  }
+
+  let { formField, onFieldChange = (formField: FormField) => {} }: Props = $props();
 
   const fieldSet = formField.type === 'checkbox' ? ['Name', 'Label'] : ['Name', 'Label', 'Required', 'Placeholder'];
 
-  const fieldSetData: { title: string; value: any }[] = fieldSet.map((title) => ({ title, value: null }));
+  const fieldSetData: { title: string; value: any }[] = $state(fieldSet.map((title) => ({ title, value: null })));
 
   function changeField(value, index) {
     fieldSetData[index].value = value;

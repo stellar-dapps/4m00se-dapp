@@ -2,7 +2,11 @@
   import type { PageData } from './$types';
   import { goto } from '$app/navigation';
 
-  export let data: PageData;
+  interface Props {
+    data: PageData;
+  }
+
+  let { data }: Props = $props();
 </script>
 
 <svelte:head>
@@ -13,7 +17,7 @@
 <ul class="list-unstyled">
   {#each data.posts as post}
     <li>
-      <article on:click={() => goto(`/blog/${post.slug}`)}>
+      <article onclick={() => goto(`/blog/${post.slug}`)}>
         <div>{post.date}</div>
         <h3>{post.title}</h3>
         <div>{post.description}</div>

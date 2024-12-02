@@ -11,8 +11,8 @@
   import type { FormElementOption } from '$lib/models/form-element-option.model.ts';
 
   const basePinataUrl = import.meta.env.VITE_GATEWAY_URL + '/ipfs/';
-  let elements: FormField[];
-  let codeContent = '';
+  let elements: FormField[] | undefined = $state();
+  let codeContent = $state('');
   const ctaTitle = '+ Add element';
 
   formStore.subscribe((value) => {
@@ -101,7 +101,7 @@
   {/if}
 
   <section>
-    {#if $formStore.selectedAsset}
+    {#if $formStore.selectedAsset && !!elements}
       {#each elements as field, index}
         <article>
           {#if field.type === 'text' || field.type === 'email' || !field.type}

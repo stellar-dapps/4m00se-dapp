@@ -1,9 +1,13 @@
 <script lang="ts">
-  export let label = '';
-  export let name = '';
-  export let checked = false;
-  export let disabled = false;
-  export let onChange = (event: any) => {};
+  interface Props {
+    label?: string;
+    name?: string;
+    checked?: boolean;
+    disabled?: boolean;
+    onChange?: any;
+  }
+
+  let { label = '', name = '', checked = false, disabled = false, onChange = (event: any) => {} }: Props = $props();
 
   function handleChange(event: Event) {
     const target = event.target as HTMLInputElement;
@@ -13,7 +17,7 @@
 
 <div class="form-group">
   <label>
-    <input type="checkbox" role="switch" {name} {checked} {disabled} on:change={handleChange} />
+    <input type="checkbox" role="switch" {name} {checked} {disabled} onchange={handleChange} />
     {label}
   </label>
 </div>

@@ -8,9 +8,9 @@
 
   let stellarPublicKey: string;
   let isAuthenticated: boolean;
-  let buttonText = 'Sign in';
-  let isButtonDisabled = false;
-  let isWalledActionInProgress = false;
+  let buttonText = $state('Sign in');
+  let isButtonDisabled = $state(false);
+  let isWalledActionInProgress = $state(false);
 
   authStore.subscribe((value) => {
     isAuthenticated = value.isAuthenticated;
@@ -86,7 +86,7 @@
 <button
   aria-busy={isWalledActionInProgress}
   class="secondary auth-button"
-  on:click={handleSignIn}
+  onclick={handleSignIn}
   disabled={isButtonDisabled || isWalledActionInProgress}
   title={buttonText}
 >

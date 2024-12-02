@@ -1,11 +1,23 @@
 <script lang="ts">
-  export let label = '';
-  export let name = '';
-  export let value = '';
-  export let placeholder: string | null = null;
-  export let disabled = false;
-  export let required = false;
-  export let onChange = (event: any) => {};
+  interface Props {
+    label?: string;
+    name?: string;
+    value?: string;
+    placeholder?: string | null;
+    disabled?: boolean;
+    required?: boolean;
+    onChange?: any;
+  }
+
+  let {
+    label = '',
+    name = '',
+    value = '',
+    placeholder = null,
+    disabled = false,
+    required = false,
+    onChange = (event: any) => {}
+  }: Props = $props();
 
   function handleInput(event: Event) {
     const target = event.target as HTMLInputElement;
@@ -17,5 +29,5 @@
   <label for={name}
     >{label}{#if required}<sup>*</sup>{/if}</label
   >
-  <input type="text" id={name} {name} {value} {placeholder} {disabled} on:input={handleInput} />
+  <input type="text" id={name} {name} {value} {placeholder} {disabled} oninput={handleInput} />
 </div>

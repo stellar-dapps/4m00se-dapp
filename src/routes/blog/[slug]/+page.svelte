@@ -2,10 +2,16 @@
   import type { PageData } from './$types';
   import type { SvelteComponent } from 'svelte';
 
-  export let data: PageData;
+  interface Props {
+    data: PageData;
+  }
+
+  let { data }: Props = $props();
 
   type C = $$Generic<typeof SvelteComponent<any, any, any>>;
-  $: component = data.component as unknown as C;
+  let component = $derived(data.component as unknown as C);
+
+  const SvelteComponent_1 = $derived(component);
 </script>
 
 <svelte:head>
@@ -16,7 +22,7 @@
 
 <h1>{data?.frontmatter?.title}</h1>
 
-<svelte:component this={component} />
+<SvelteComponent_1 />
 
 <style>
   .meta {
