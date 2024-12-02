@@ -1,7 +1,11 @@
 <script lang="ts">
-  export let title = '';
-  export let options: any[] = [];
-  export let onSelect;
+  interface Props {
+    title?: string;
+    options?: any[];
+    onSelect: any;
+  }
+
+  let { title = '', options = [], onSelect }: Props = $props();
 </script>
 
 <details class="dropdown">
@@ -10,7 +14,7 @@
   </summary>
   <ul>
     {#each options as option}
-      <li><a on:click={() => onSelect(option)}>{option.title}</a></li>
+      <li><a onclick={() => onSelect(option)}>{option.title}</a></li>
     {/each}
   </ul>
 </details>

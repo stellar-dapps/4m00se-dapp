@@ -8,14 +8,19 @@
   import { authStore } from '$lib/stores/auth.store.ts';
   import { page } from '$app/stores';
   import { onMount } from 'svelte';
+  interface Props {
+    children?: import('svelte').Snippet;
+  }
 
-  let authBlockedReason: string | null;
+  let { children }: Props = $props();
+
+  let authBlockedReason: string | null = $state(null);
 
   authStore.subscribe((value) => {
-    authBlockedReason = value.authBlockedReason;
+    authBlockedReason = value?.authBlockedReason;
   });
 
-  let isMobile = false;
+  let isMobile = $state(false);
 
   onMount(() => {
     const userAgent = navigator.userAgent;
@@ -46,7 +51,7 @@
 {/if}
 
 <main class="container">
-  <slot />
+  {@render children?.()}
 </main>
 
 {#if !$page.url.pathname.includes('/app')}

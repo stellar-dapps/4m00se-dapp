@@ -5,7 +5,7 @@
   import { onMount } from 'svelte';
   import { goto } from '$app/navigation';
 
-  let isMobile = false;
+  let isMobile = $state(false);
 
   onMount(() => {
     const userAgent = navigator.userAgent;
@@ -24,7 +24,7 @@
     }
   });
 
-  let isAuthenticated: boolean;
+  let isAuthenticated: boolean = $state(false);
 
   authStore.subscribe((value) => {
     isAuthenticated = value.isAuthenticated;
@@ -62,7 +62,7 @@
 
 {#if !isMobile}
   {#if isAuthenticated && !$page.url.pathname.includes('/app')}
-    <li><button type="button" on:click={goToApp} class="auth-button">4m00se app</button></li>
+    <li><button type="button" onclick={goToApp} class="auth-button">4m00se app</button></li>
   {:else}
     <li><AuthButton /></li>
   {/if}

@@ -2,6 +2,7 @@ import type { FormConfig } from '$lib/models/form-config.model.ts';
 import type { FormWidgetOptions } from '$lib/models/form-widget-options.ts';
 import FormWidget from './FormWidget.svelte';
 import { getFormConfig } from './form-widget.service.ts';
+import { mount } from 'svelte';
 
 declare global {
   interface Window {
@@ -17,7 +18,7 @@ export async function initFormWidget(options: FormWidgetOptions) {
 
   if (config) {
     if (rootElement) {
-      new FormWidget({
+      mount(FormWidget, {
         target: rootElement,
         props: { config, onSubmit }
       });

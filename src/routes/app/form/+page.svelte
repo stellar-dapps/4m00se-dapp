@@ -11,8 +11,8 @@
   import type { FormElementOption } from '$lib/models/form-element-option.model.ts';
 
   const basePinataUrl = import.meta.env.VITE_GATEWAY_URL + '/ipfs/';
-  let elements: FormField[];
-  let codeContent = '';
+  let elements: FormField[] = $state([]);
+  let codeContent = $state('');
   const ctaTitle = '+ Add element';
 
   formStore.subscribe((value) => {

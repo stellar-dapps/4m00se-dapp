@@ -13,11 +13,11 @@
   import { handleFormCreate } from '$lib/utils/form-create-manager.ts';
   import { authStore } from '$lib/stores/auth.store.js';
 
-  let isWideScreen = true;
+  let isWideScreen = $state(true);
 
   // TODO get everything from form store
-  let currentFormName = 'My new form name';
-  let currentFormDescription = `<no description>`;
+  let currentFormName = $state('My new form name');
+  let currentFormDescription = $state(`<no description>`);
   const formElements: any[] = [];
 
   formStore.subscribe((value) => {
@@ -118,7 +118,7 @@
                 disabled={!$formStore.inProgressFormConfig?.fields?.length ||
                   !$formStore.inProgressFormConfig?.name ||
                   $formStore.inProgressFormConfig?.name === 'N/A*'}
-                on:click={saveForm}>Save</button
+                onclick={saveForm}>Save</button
               >
             </li>
           {/if}
@@ -134,13 +134,13 @@
           <div role="group">
             <button
               type="button"
-              on:click={() => goto('/app/form')}
+              onclick={() => goto('/app/form')}
               class={!$page.url.pathname.includes('submissions') ? 'secondary' : 'outline secondary'}
               >Form elements</button
             >
             <button
               type="button"
-              on:click={() => goto('/app/form/submissions')}
+              onclick={() => goto('/app/form/submissions')}
               class={$page.url.pathname.includes('submissions') ? 'secondary' : 'outline secondary'}
               disabled={!$formStore.selectedAsset}>Responses</button
             >

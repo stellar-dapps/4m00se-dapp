@@ -130,7 +130,7 @@
   <ul class="list-unstyled">
     {#each $formStore.formAssets as form}
       <li>
-        <article on:click={() => handleFormSelection(form)}>
+        <article onclick={() => handleFormSelection(form)}>
           <div class="form-name">
             <h5>{form?.ipfsData?.name}</h5>
             <h5 class="additional">|</h5>
@@ -141,7 +141,7 @@
       </li>
     {/each}
   </ul>
-  <button type="button" on:click={triggerFormCreate}>+ Add form</button>
+  <button type="button" onclick={triggerFormCreate}>+ Add form</button>
 {/if}
 
 <style>

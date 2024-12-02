@@ -5,11 +5,15 @@
 
   const md = new MarkdownIt();
 
-  export let config: FormConfig;
-  export let onSubmit: Function | null;
+  interface Props {
+    config: FormConfig;
+    onSubmit: Function | null;
+  }
+
+  let { config, onSubmit }: Props = $props();
 
   let formData = {};
-  let isSubmittedSuccessfully = false;
+  let isSubmittedSuccessfully = $state(false);
 
   function handleChange(event) {
     formData[event.target.name] = event.target.value;
@@ -25,7 +29,7 @@
   }
 </script>
 
-<form on:submit={handleSubmit} class:rounded={config?.styles?.isRounded}>
+<form onsubmit={handleSubmit} class:rounded={config?.styles?.isRounded}>
   {#if isSubmittedSuccessfully}
     <h6>🎉 Success!</h6>
   {:else}
@@ -41,7 +45,7 @@
             id={field.name ?? '' + index}
             type={field.type}
             name={field.name}
-            on:input={handleChange}
+            oninput={handleChange}
             placeholder={field.placeholder ?? null}
             required={field.required || null}
           />
