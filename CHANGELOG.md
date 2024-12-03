@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.12.0
+
+_released `2024-12-02`_
+
+The application is migrated to Svelte 5, the docs are updated and the scaffold is simplified (including removing unnecessary/unused stuff).
+
+### Changed
+
+- Render deploys only the Node part from now, until the planned smart contracts are integrated
+- Svelte is migrated to v5 providing new approaches to reactive frontend development
+
 ## 0.11.0
 
 _released `2024-08-28`_
