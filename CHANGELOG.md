@@ -6,6 +6,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.13.0
+
+_released `2025-01-27`_
+
+Some stuff got broken after previous update so the fixes are here.
+
+### Changed
+
+- Supply chain was updated — almost all the packages
+
+### Fixed
+
+- Rollup config and widget component were updated to provide for proper PicoCSS styles loading in the resulting embeds
+- Incorrect list (un)styling for Safari fam
+
 ## 0.12.0
 
 _released `2024-12-02`_
