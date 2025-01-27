@@ -39,4 +39,7 @@
     color: var(--pico-color);
     margin: 0;
   }
+  li {
+    list-style: none;
+  }
 </style>
