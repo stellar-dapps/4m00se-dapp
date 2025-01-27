@@ -9,6 +9,7 @@ import gzipPlugin from 'rollup-plugin-gzip';
 import filesize from 'rollup-plugin-filesize';
 import strip from '@rollup/plugin-strip';
 import commonjs from '@rollup/plugin-commonjs';
+import postcss from 'rollup-plugin-postcss';
 
 export default {
   input: 'src/widget/init-form-widget.ts',
@@ -20,6 +21,16 @@ export default {
   },
   plugins: [
     commonjs(),
+    postcss({
+      minimize: true,
+      inject: true,
+      plugins: [
+        atImport({
+          path: ['node_modules']
+        }),
+        autoprefixer()
+      ]
+    }),
     typescript({
       sourceMap: false,
       inlineSources: false,
@@ -31,14 +42,7 @@ export default {
         sourceMap: false,
         postcss: {
           minimize: true,
-          plugins: [
-            atImport({
-              root: process.cwd(),
-              path: ['node_modules'],
-              skipDuplicates: true
-            }),
-            autoprefixer()
-          ]
+          plugins: [autoprefixer()]
         }
       }),
       compilerOptions: {
@@ -49,7 +53,8 @@ export default {
     resolve({
       browser: true,
       dedupe: ['svelte'],
-      extensions: ['.svelte', '.css', '.js', '.ts']
+      extensions: ['.svelte', '.css', '.js', '.ts'],
+      mainFields: ['svelte', 'browser', 'module', 'main']
     }),
     terser(),
     gzipPlugin(),

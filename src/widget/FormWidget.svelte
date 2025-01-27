@@ -2,6 +2,7 @@
   import type { FormConfig } from '$lib/models/form-config.model.ts';
   import MarkdownIt from 'markdown-it';
   import { onSubmitDefault } from './form-widget.service.ts';
+  import '@picocss/pico/css/pico.min.css';
 
   const md = new MarkdownIt();
 
@@ -58,8 +59,6 @@
 </form>
 
 <style>
-  @import '@picocss/pico/css/pico.min.css';
-
   form {
     font-family: var(--pico-font-family);
     display: flex;
