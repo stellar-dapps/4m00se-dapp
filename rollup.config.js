@@ -22,7 +22,8 @@ export default {
     commonjs(),
     typescript({
       sourceMap: false,
-      inlineSources: false
+      inlineSources: false,
+      noEmit: true
     }),
     svelte({
       emitCss: false,
@@ -30,14 +31,26 @@ export default {
         sourceMap: false,
         postcss: {
           minimize: true,
-          plugins: [atImport(), autoprefixer()]
+          plugins: [
+            atImport({
+              root: process.cwd(),
+              path: ['node_modules'],
+              skipDuplicates: true
+            }),
+            autoprefixer()
+          ]
         }
       }),
       compilerOptions: {
-        enableSourcemap: false
+        enableSourcemap: false,
+        css: 'injected'
       }
     }),
-    resolve({ browser: true, dedupe: ['svelte'] }),
+    resolve({
+      browser: true,
+      dedupe: ['svelte'],
+      extensions: ['.svelte', '.css', '.js', '.ts']
+    }),
     terser(),
     gzipPlugin(),
     filesize(),
